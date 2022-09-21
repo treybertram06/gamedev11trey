@@ -28,4 +28,10 @@ Select Box:<br>
 <option value='myTwo'>Two
 <option value='myTwo'>Three
 </select>
+<br>
+
+Image: <input type="image" alt="Submit" src="https://www.downloadclipart.net/large/18461-red-submit-button-design.png"  width="100px"><br>
+
+
+
 </form>
