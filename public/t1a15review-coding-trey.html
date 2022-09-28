@@ -225,23 +225,31 @@ class myCat extends myAnimal {
 
 <div id='myDiv131'>...</div><br>
     
-    Try out multiplication
-    <br> 
-
-    <input type="text" id="myTextIn1" value="3" size="30">  * <input type="text" id="myTextIn2" value="6" size="30"> 
-    
-    <input id="myButton124" type="button" value="Add the numbers" onclick="{
-
-   var my1 = document.getElementById('myTextIn1').value  
-   var my2 = document.getElementById('myTextIn2').value  
-   document.getElementById('myDiv124').innerHTML +=  'Numbers added as floating point (decimal) numbers ' +  my1 + ' * ' +  my2 + ' = ' +  (parseFloat(my1) * parseFloat(my2))  + '<br>'                                         
-   document.getElementById('myDiv124').innerHTML +=  'Numbers added using *1 trick ' +  my1 + ' * ' +  my2 + ' = ' +  (my1*1 * my2*1)  + '<br>'                                                       
-                                                             
-                                                              
-}"><br><br>
-
-<div id='myDiv124'>...</div><br>
-    
+  <form>
+    1st Number : <input type="text" 
+    id="firstNumber" /><br>
+    2nd Number: <input type="text" 
+    id="secondNumber" /><br>
+    <input type="button" onClick="multiplyBy()" 
+    Value="Multiply" /><br>
+  </form>
+  
+  <p>The Result is : <br>
+   <span id = "result"></span>
+  </p>
+  
+  
+  <script>
+    function multiplyBy()
+    {
+      num1 = document.getElementById(
+        "firstNumber").value;
+      num2 = document.getElementById(
+        "secondNumber").value;
+      document.getElementById(
+        "result").innerHTML = num1 * num2;
+    }
+  </script>
   
     <style>
       body {
