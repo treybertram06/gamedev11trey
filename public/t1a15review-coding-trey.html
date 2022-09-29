@@ -280,24 +280,18 @@ class myCat extends myAnimal {
     
     
  <form>
-    1st Number : <input type="text" 
+    1st Number : <input type="number" 
     id="aFirstNumber" /><br>
-    2nd Number: <input type="text" 
+    2nd Number: <input type="number" 
     id="aSecondNumber" /><br>
     <input type="button" onClick="add()" 
     Value="Add" /><br>
-    <input type="button" onClick="set()" 
-    Value="Set" /><br>
   </form>    
     
     <p id="additionDemo"></p>
 
 <script>
-function add() {
-      let x = a + b;
-      document.getElementById("additionDemo").innerHTML = x;
-}
-  function set() {
+  function add() {
       let a = document.getElementById("aFirstNumber").value;
       let b = document.getElementById("aSecondNumber").value;
       let x = a + b;
