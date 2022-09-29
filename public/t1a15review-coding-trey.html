@@ -293,7 +293,7 @@ class myCat extends myAnimal {
 <script>
   function add() {
       let z = document.getElementById("aFirstNumber").value;
-      let y = document.getElementById("aSecondNumber").value;
+      let y = document.getElementById("aSecondNumber").value;           //why does this add them as a string but the lower one does it properly
       let x = z + y;
       document.getElementById("additionDemo").innerHTML = x;
 }
@@ -307,7 +307,7 @@ class myCat extends myAnimal {
       let a = 5;
       let b = 8;
       let c = a + b;
-      document.getElementById("additionDemoS").innerHTML = c;
+      document.getElementById("additionDemoS").innerHTML = c;          //this one outputs 13 like it should
 </script>
     
     
