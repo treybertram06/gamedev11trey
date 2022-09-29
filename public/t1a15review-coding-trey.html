@@ -224,7 +224,7 @@ class myCat extends myAnimal {
 }"><br><br>
 
 <div id='myDiv131'>...</div><br><br><br><br>
-    
+   Multiplication 
   <form>
     1st Number : <input type="text" 
     id="mfirstNumber" /><br>
@@ -249,8 +249,8 @@ class myCat extends myAnimal {
       document.getElementById(
         "mresult").innerHTML = num1 * num2;
     }
-  </script>
-  
+  </script><br>
+  Division
      <form>
     1st Number : <input type="text" 
     id="dfirstNumber" /><br>
@@ -276,7 +276,64 @@ class myCat extends myAnimal {
         "dresult").innerHTML = num1 / num2;
     }
   </script>
+  <br>
+    Addition but different
+     <form>
+    1st Number : <input type="text" 
+    id="afirstNumber" /><br>
+    2nd Number: <input type="text" 
+    id="asecondNumber" /><br>
+    <input type="button" onClick="add()" 
+    Value="Add" /><br>
+  </form>
   
+  <p>The Result is : <br>
+   <span id = "aresult"></span>
+  </p>
+  
+  
+  <script>
+    function multiplyBy()
+    {
+      num1 = document.getElementById(
+        "afirstNumber").value;
+      num2 = document.getElementById(
+        "asecondNumber").value;
+      document.getElementById(
+        "aresult").innerHTML = num1 + num2;
+    }
+  </script>
+  <br>
+    Subtraction
+     <form>
+    1st Number : <input type="text" 
+    id="sfirstNumber" /><br>
+    2nd Number: <input type="text" 
+    id="ssecondNumber" /><br>
+    <input type="button" onClick="subract()" 
+    Value="Subtract" /><br>
+  </form>
+  
+  <p>The Result is : <br>
+   <span id = "sresult"></span>
+  </p>
+  
+  
+  <script>
+    function subtract()
+    {
+      num1 = document.getElementById(
+        "sfirstNumber").value;
+      num2 = document.getElementById(
+        "ssecondNumber").value;
+      document.getElementById(
+        "sresult").innerHTML = num1 - num2;
+    }
+  </script>
+  
+    
+    
+    
     <style>
       body {
         background-color: black;
