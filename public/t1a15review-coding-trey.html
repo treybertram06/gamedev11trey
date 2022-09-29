@@ -227,15 +227,15 @@ class myCat extends myAnimal {
     
   <form>
     1st Number : <input type="text" 
-    id="firstNumber" /><br>
+    id="mfirstNumber" /><br>
     2nd Number: <input type="text" 
-    id="secondNumber" /><br>
+    id="msecondNumber" /><br>
     <input type="button" onClick="multiplyBy()" 
     Value="Multiply" /><br>
   </form>
   
   <p>The Result is : <br>
-   <span id = "result"></span>
+   <span id = "mresult"></span>
   </p>
   
   
@@ -243,25 +243,25 @@ class myCat extends myAnimal {
     function multiplyBy()
     {
       num1 = document.getElementById(
-        "firstNumber").value;
+        "mfirstNumber").value;
       num2 = document.getElementById(
-        "secondNumber").value;
+        "msecondNumber").value;
       document.getElementById(
-        "result").innerHTML = num1 * num2;
+        "mresult").innerHTML = num1 * num2;
     }
   </script>
   
      <form>
     1st Number : <input type="text" 
-    id="firstNumber" /><br>
+    id="dfirstNumber" /><br>
     2nd Number: <input type="text" 
-    id="secondNumber" /><br>
+    id="dsecondNumber" /><br>
     <input type="button" onClick="divideBy()" 
     Value="Divide" /><br>
   </form>
   
   <p>The Result is : <br>
-   <span id = "result"></span>
+   <span id = "dresult"></span>
   </p>
   
   
@@ -269,11 +269,11 @@ class myCat extends myAnimal {
     function divideBy()
     {
       num1 = document.getElementById(
-        "firstNumber").value;
+        "dfirstNumber").value;
       num2 = document.getElementById(
-        "secondNumber").value;
+        "dsecondNumber").value;
       document.getElementById(
-        "result").innerHTML = num1 / num2;
+        "dresult").innerHTML = num1 / num2;
     }
   </script>
   
