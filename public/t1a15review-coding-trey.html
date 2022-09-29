@@ -291,8 +291,10 @@ class myCat extends myAnimal {
     <p id="additionDemo"></p>
 
 <script>
-let x = document.getElementById("aFirstNumber") + 5;
-document.getElementById("additionDemo").innerHTML = x;
+function add() {
+      let x = document.getElementById("aFirstNumber") + document.getElementById("aSecondNumber");
+      document.getElementById("additionDemo").innerHTML = x;
+}
 </script>
     
     
