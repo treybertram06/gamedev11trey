@@ -41,7 +41,7 @@
     Value="Multiply" /><br>
   </form>
   
-  <p>The Result is : <br>
+  <p>The Product is : <br>
    <span id = "mresult"></span>
   </p>
   
@@ -67,7 +67,7 @@
     Value="Divide" /><br>
   </form>
   
-  <p>The Result is : <br>
+  <p>The Quotient is : <br>
    <span id = "dresult"></span>
   </p>
   
@@ -95,7 +95,7 @@
     Value="Add" /><br>
   </form>    
     
-     <p>The Result is : <br>
+     <p>The Sum is : <br>
    <span id = "aresult"></span>
   </p>
   
@@ -113,5 +113,31 @@
   </script>
   <br>    
 
+     <form>
+    1st Number : <input type="number" 
+    id="sFirstNumber" /><br>
+    2nd Number: <input type="number" 
+    id="sSecondNumber" /><br>
+    <input type="button" onClick="minusNumber()" 
+    Value="Subtract" /><br>
+  </form>    
+    
+     <p>The Difference is : <br>
+   <span id = "sresult"></span>
+  </p>
+  
+    
+      <script>
+    function minusNumber()
+    {
+      num1 = document.getElementById(
+        "sFirstNumber").value;
+      num2 = document.getElementById(
+        "sSecondNumber").value;
+      document.getElementById(
+        "sresult").innerHTML = num1*1 - num2*1;
+    }
+  </script>
+  <br>    
   </body>
 </html>
