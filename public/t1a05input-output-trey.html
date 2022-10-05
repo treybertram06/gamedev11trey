@@ -26,7 +26,7 @@
     
     <div id="myDiv01">...</div>    
     
-    
+    <br>
     
     
     
@@ -95,27 +95,23 @@
     Value="Add" /><br>
   </form>    
     
-    <p id="additionDemo"></p>
+     <p>The Result is : <br>
+   <span id = "aresult"></span>
+  </p>
+  
+    
+      <script>
+    function addNumber()
+    {
+      num1 = document.getElementById(
+        "afirstNumber").value;
+      num2 = document.getElementById(
+        "asecondNumber").value;
+      document.getElementById(
+        "aresult").innerHTML = num1 + num2;
+    }
+  </script>
+  <br>    
 
-<script>
-  function add() {
-      let z = document.getElementById("aFirstNumber").value;
-      let y = document.getElementById("aSecondNumber").value;           //why does this add them as a string but the lower one does it properly
-      let x = z + y;
-      document.getElementById("additionDemo").innerHTML = x;
-}
-</script>
-    
-    <br><br><br><br><br><br>
-    
-        <p id="additionDemoS"></p>
-
-<script>
-      let a = 5;
-      let b = 8;
-      let c = a + b;
-      document.getElementById("additionDemoS").innerHTML = c;          //this one outputs 13 like it should
-</script>
-    
   </body>
 </html>
