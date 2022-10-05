@@ -91,7 +91,7 @@
     id="aFirstNumber" /><br>
     2nd Number: <input type="number" 
     id="aSecondNumber" /><br>
-    <input type="button" onClick="add()" 
+    <input type="button" onClick="addNumber()" 
     Value="Add" /><br>
   </form>    
     
@@ -104,9 +104,9 @@
     function addNumber()
     {
       num1 = document.getElementById(
-        "afirstNumber").value;
+        "aFirstNumber").value;
       num2 = document.getElementById(
-        "asecondNumber").value;
+        "aSecondNumber").value;
       document.getElementById(
         "aresult").innerHTML = num1 + num2;
     }
