@@ -16,12 +16,12 @@
     </pre>
     
     <h4> Example working code </h4>
-    <input id="myNum01" type=number value="4" > <br>
+    <input id="myNum01" type=number value="" > <br>
     
-   <input type=button value="myEvent squares" onclick="{
+   <input type=button value="Square Input" onclick="{
                                                        let myIn01 = parseFloat(document.getElementById('myNum01').value)
                                                        let myAnswer = myIn01 * myIn01
-                                                       document.getElementById('myDiv01').innerHTML = myIn01 + ' squared = ' + myAnswer
+                                                       document.getElementById('myDiv01').innerHTML = myIn01 + ' ^2 = ' + myAnswer
                                                        }"><br>
     
     <div id="myDiv01">...</div>    
