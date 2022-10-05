@@ -29,5 +29,93 @@
     
     
     
+    
+    
+      Multiplication 
+  <form>
+    1st Number : <input type="text" 
+    id="mfirstNumber" /><br>
+    2nd Number: <input type="text" 
+    id="msecondNumber" /><br>
+    <input type="button" onClick="multiplyBy()" 
+    Value="Multiply" /><br>
+  </form>
+  
+  <p>The Result is : <br>
+   <span id = "mresult"></span>
+  </p>
+  
+  
+  <script>
+    function multiplyBy()
+    {
+      num1 = document.getElementById(
+        "mfirstNumber").value;
+      num2 = document.getElementById(
+        "msecondNumber").value;
+      document.getElementById(
+        "mresult").innerHTML = num1 * num2;
+    }
+  </script><br>
+  Division
+     <form>
+    1st Number : <input type="text" 
+    id="dfirstNumber" /><br>
+    2nd Number: <input type="text" 
+    id="dsecondNumber" /><br>
+    <input type="button" onClick="divideBy()" 
+    Value="Divide" /><br>
+  </form>
+  
+  <p>The Result is : <br>
+   <span id = "dresult"></span>
+  </p>
+  
+  
+  <script>
+    function divideBy()
+    {
+      num1 = document.getElementById(
+        "dfirstNumber").value;
+      num2 = document.getElementById(
+        "dsecondNumber").value;
+      document.getElementById(
+        "dresult").innerHTML = num1 / num2;
+    }
+  </script>
+  <br>    
+    
+    
+ <form>
+    1st Number : <input type="number" 
+    id="aFirstNumber" /><br>
+    2nd Number: <input type="number" 
+    id="aSecondNumber" /><br>
+    <input type="button" onClick="add()" 
+    Value="Add" /><br>
+  </form>    
+    
+    <p id="additionDemo"></p>
+
+<script>
+  function add() {
+      let z = document.getElementById("aFirstNumber").value;
+      let y = document.getElementById("aSecondNumber").value;           //why does this add them as a string but the lower one does it properly
+      let x = z + y;
+      document.getElementById("additionDemo").innerHTML = x;
+}
+</script>
+    
+    <br><br><br><br><br><br>
+    
+        <p id="additionDemoS"></p>
+
+<script>
+      let a = 5;
+      let b = 8;
+      let c = a + b;
+      document.getElementById("additionDemoS").innerHTML = c;          //this one outputs 13 like it should
+</script>
+    
   </body>
 </html>
