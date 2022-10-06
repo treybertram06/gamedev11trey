@@ -29,16 +29,16 @@
     <br><br>
     
  
-     <input id="myNum02" type=number value="" >  <input id="myNum03" type=number value="" > <br>
+     <input id="myNum02" type=number value="" >  <input id="myMultiplier" type=text value="*">  <input id="myNum03" type=number value="" > <br>
     
    <input type=button value="do math" onclick="{
                                                        let myIn02 = parseFloat(document.getElementById('myNum02').value)
                                                        let myIn03 = parseFloat(document.getElementById('myNum03').value)
                                                        let myAnswer = myIn02 myMultiplier myIn03
-                                                       document.getElementById('myDiv02').innerHTML = myIn02 + myMultiplier + myIn03 + ' = ' +myAnswer
+                                                       document.getElementById('myDiv02').innerHTML = myIn02 + myMultiplier + myIn03 + ' = ' + myAnswer
                                                        }"><br>
     
-    <input id="myMultiplier" type=text value="*">
+  
     
     
     
