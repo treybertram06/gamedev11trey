@@ -1,39 +1,63 @@
-Version 0.0.1
+<html>
 
-<h2 align=center>t1a06-varaibles-by-Trey.html</h2>
+<head>
+   Version 0.0.1
 
-<a href="https://www.w3schools.com/js/js_variables.asp">Good reference to Variables in Javascript 
-and other languages</a><br>
+   <h2 align=center>T1A06-Varaibles-by-Trey.html</h2>
+</head>
+    
+<body>    
+   <a href="https://www.w3schools.com/js/js_variables.asp">Good reference to Variables in Javascript 
+   and other languages</a><br>
 
-Other Languages use: bool, int, float, char, string, 
-int_8, int_16 etc<br>
+   Other Languages use: bool, int, float, char, string, 
+   int_8, int_16 etc<br>
 
-Note: Javascript does use var and let for local variables.<br>
-For Global variables Mr. Ellis prefers to use document.myVarName
+   Note: Javascript does use var and let for local variables.<br>
+   For Global variables Mr. Ellis prefers to use document.myVarName
 
 
-<h4> Example input output code</h4>
-<pre>
+   <h4> Example input output code</h4>
+   <pre>
     let myIn01 = document.getElementById('myText01').value
     document.getElementById('myDiv01').innerHTML = myIn01 
-</pre>
+   </pre>
 
-<h4> Example working code</h4>
+   <h4> Example working code</h4>
 
-<input id="myText01" type=text value="The dog " ><br> 
+   <input id="myText01" type=text value="The dog " ><br> 
 
-<input type=button value="Show Variable" onclick="{
+   <input type=button value="Show Variable" onclick="{
     let myIn01 = document.getElementById('myText01').value
     document.getElementById('myDiv01').innerHTML = myIn01
 
-}"><br>
+   }"><br>
 
-<input type=button value="Using no variable" onclick="{
-   document.getElementById('myDiv01').innerHTML = 
-       document.getElementById('myText01').value
-}"><br>
+   <input type=button value="Using no variable" onclick="{
+   document.getElementById('myDiv01').innerHTML = document.getElementById('myText01').value
+     
+   }"><br>
 
-<div id="myDiv01">...</div>
+   <div id="myDiv01">...</div>
 
+    </body>
+    
+     <style>
+  
+    body {
+      background-color: #B795FF;
+      color: black;
+      font-family: serif;
+      outline-style: solid;
+      outline-color: #702FFA;
+      outline-width: thick;
+      padding: 10px;
+      
+    }
+
+    
+  </style>
+    
+</html>
 
 
