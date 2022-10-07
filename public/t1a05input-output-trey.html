@@ -158,9 +158,25 @@
   </script>
   <br><br><br><br><br><br><br><br><br>    
     
+    <button id="clickButton">Click the button to add the input into the
+below Text Box</button>
+<br/><br />
+<input id="readTheInput" />
+<script>
+    document.getElementById("bOne").addEventListener("click", () =>{
+        document.getElementById("readTheInput").value += "1";
+    });
+   document.getElementById("bTwo").addEventListener("click", () =>{
+        document.getElementById("readTheInput").value += "2";
+    });
+   document.getElementById("bThree").addEventListener("click", () =>{
+        document.getElementById("readTheInput").value += "3";
+    });
+</script>
+    <br>
     
 <table class=calc border=1>
-  <tr><td><input type=button value="1"></td><td><input type=button value="2"></td><td><input type=button value="3"></td></tr>
+  <tr><td><input type=button value="1" id=bOne></td><td><input type=button value="2" id=bTwo></td><td><input type=button value="3" id=bThree></td></tr>
   <tr><td><input type=button value="4"></td><td><input type=button value="5"></td><td><input type=button value="6"></td></tr>
   <tr><td><input type=button value="7"></td><td><input type=button value="8"></td><td><input type=button value="9"></td></tr>
   <tr><td><input type=button value=""></td><td><input type=button value="0"></td><td><input type=button value=""></td></tr>
