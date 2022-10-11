@@ -41,12 +41,23 @@
    <div id="myDiv01">...</div>
 
    
-    <input type="button" value="Popup using variable" onclick="popup()">
+        <input type="button" value="Popup using var" onclick="popup01()">
+	<input type="button" value="Popup using let" onclick="popup02()">
+	
+	
+	
+	
+	
+	
    <script>
-      
-    function popup() {  
+    function popup02() {
+	       let message = "popup using let and alert";
+               alert(message);
+ 
+    }
+    function popup01() {  
 		var msg; 
-		msg = "Button makes popup"; 
+		msg = "popup using var and alert"; 
 		alert(msg);
 
 		var num = "two variables assigned the same value"; 
