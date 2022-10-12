@@ -55,7 +55,12 @@ if (myHour < 18) {
 
 <p>Time based greeting</p>
 
-<p class="gMEN"></p>
+<p class="ifPrint02"></p><br>
+
+<p class="ifPrint01"></p><br>
+
+<input id="myNum02" type=number value="4" ><br>
+<input type=button value="Complex if using function" onclick="myComplexIf01"
 
 <script>
 
@@ -68,8 +73,15 @@ if (time < 10) {
 } else {
   greeting = "Good evening";
 }
-document.getElementById("gMEN").innerHTML = greeting;
+document.getElementById("ifPrint02").innerHTML = greeting;
 
+function myComplexIf01() {
+    let myIn02 = parseFloat(document.getElementById('myNum02').value)
+    if ((myIn02 != 3 || myIn02 > -3)  && myIn02 <=100 ){
+        document.getElementById('ifPrint01').innerHTML = myIn02 + ' is complex'
+    } else {
+        document.getElementById('ifPrint01').innerHTML = myIn02 + ' is not complex'} 
+}
 </script>
 
 
@@ -88,7 +100,7 @@ document.getElementById("gMEN").innerHTML = greeting;
       
        }
        
-     .gMEN {
+     .ifPrint02 {
       outline-style: solid;
       outline-color: #388C53;
       outline-width: medium;
