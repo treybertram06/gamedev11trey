@@ -62,6 +62,11 @@ if (myHour < 18) {
 <input type=button value="Complex if using function" onclick="myComplexIf01()">
 <p id="ifPrint01"></p><br>
 
+<input id="myNum03" type=number value="48" ><br>
+How much money do you have? maybe 1000?
+<input id="myNum04" type=number value="0" ><br>
+<input type=button value="Are you tall enough to ride?" onclick="myComplexIf02()">
+<p id="ifPrint03"></p><br>
 <script>
 
 const time = new Date().getHours();
@@ -75,8 +80,6 @@ if (time < 10) {
 }
 document.getElementById("ifPrint02").innerHTML = greeting;
 
-</script>
-<script>
   function myComplexIf01() {
     let myIn02 = parseFloat(document.getElementById("myNum02").value);
     if ((myIn02 != 3 || myIn02 > -3)  && myIn02 <=100 ){
@@ -85,6 +88,13 @@ document.getElementById("ifPrint02").innerHTML = greeting;
         document.getElementById("ifPrint01").innerHTML = myIn02 + ' is not complex'};
 }
 
+function myComplexIf02() {
+  let myIn03 = parseFloat(document.getElementById("myNum03").value);
+  let myIn04 = parseFloat(document.getElementById("myNum04").value);
+  if (myIn03 >= 48 || myIn04 >= 1000) {
+    document.getElementById("ifPrint03").innerHTML = "Happy child";
+  } else { 
+    document.getElementById("ifPrint03").innerHTML = "Cry and go home";
     </script>
 
 
