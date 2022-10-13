@@ -116,7 +116,11 @@ Max loops: <input id="myNum01" type=number value="4" ><br>
 Max loops: <input id="myNum02" type=number value="5" ><br> 
 
 <input type=button value="Basic For loop with Decisions" onclick="forLoopIf()">
-<div id="myDiv02"><font color=red>...</font>
+<div id="myDiv02"><font color=red>...</font><br><br>
+<p id=vertWords></p>
+
+
+
 <script>
 function forLoopIf() {
     document.getElementById('myDiv02').innerHTML = '';
@@ -135,6 +139,14 @@ function forLoopIf() {
     document.getElementById('myDiv02').innerHTML = myTemp;
 }
 
+let vWord = "You can make words stack vertically";
+
+let text = "";
+for (let x of vWord) {
+  text += x + "<br>";
+}
+
+document.getElementById("vertWords").innerHTML = text;
 </script>
     </body>
         
