@@ -1,13 +1,33 @@
-Version 0.0.1
+<html>
+    <head>
+    Version 0.0.1
 
-<h2 align=center>t1a08-loops-by-Fred.html</h2>
-
-<a href="">Good reference to Javascript Loops</a><br>
+    <h2 align=center>T1A08-Loops-by-Trey.html</h2>
+    </head>
+    <body>
+<a href="https://www.w3schools.com/js/js_loop_for.asp">Good reference to Javascript Loops</a><br>
 
 
 <h4> Example input output code</h4>
 <pre>
+Max loops: <input id="myNum01" type=number value="4" ><br> 
 
+<input type=button value="Basic For loop with Decisions" onclick="{
+    document.getElementById('myDiv01').innerHTML = ''
+    let myTemp = ''
+
+    let myMax = parseInt(document.getElementById('myNum01').value)
+
+    for (let myLoop = 0; myLoop < myMax; myLoop++ ){
+
+       if (myLoop * 2 > myMax){
+          myTemp += ' cool '
+      }
+
+      myTemp += 'Loop number: ' + myLoop + '<br>'
+    }
+    document.getElementById('myDiv01').innerHTML = myTemp 
+}">
 </pre>
 
 <h4> Example working code</h4>
@@ -79,4 +99,5 @@ Max loops: <input id="myNum01" type=number value="4" ><br>
 }">
 
 <div id="myDiv01"><font color=red>...</font></div>
-
+    </body>
+</html>
