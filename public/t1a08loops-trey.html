@@ -118,6 +118,7 @@ Max loops: <input id="myNum02" type=number value="5" ><br>
 <input type=button value="Basic For loop with Decisions (makes everything below disappear)" onclick="forLoopIf()">
 <div id="myDiv02"><font color=red>...</font><br><br>
 <p id=vertWords></p>
+<input type=button value="out ofideas" onclick="fortword()">
 <p id="fort"></p>
 
 
@@ -148,7 +149,7 @@ for (let x of vWord) {
 
 document.getElementById("vertWords").innerHTML = text;
 
-
+function fortword() {
 const bort = ["I love fortnite", "fortnite loves me", "fortnite is life"];
 
 let text = "";
@@ -157,6 +158,7 @@ for (let i = 0; i < bort.length; i++) {
 }
 
 document.getElementById("fort").innerHTML = text;
+}
 </script>
     </body>
 
