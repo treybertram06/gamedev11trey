@@ -18,6 +18,69 @@
   </style> 
         
     </head>
+    
+    <script>
+
+function forLoopIf() {
+    document.getElementById('myDiv02').innerHTML = '';
+    let myTemp = '';
+
+    let myMax = parseInt(document.getElementById('myNum02').value);
+
+    for (let myLoop = 0; myLoop < myMax; myLoop++ ){
+
+       if (myLoop * 2 > myMax){
+          myTemp += ' cool '
+      };
+
+      myTemp += 'Loop number: ' + myLoop + '<br>';
+    }
+    document.getElementById('myDiv02').innerHTML = myTemp;
+}
+
+let vWord = "You can make words stack vertically";
+
+let text = "";
+for (let x of vWord) {
+  text += x + "<br>";
+}
+
+document.getElementById("vertWords").innerHTML = text;
+
+function fortword() {
+const bort = ["I love fortnite", "fortnite loves me", "fortnite is life"];
+
+let text = "";
+for (let i = 0; i < bort.length; i++) {
+  text += bort[i] + "<br>";
+}
+
+document.getElementById("fort").innerHTML = text;
+};
+
+function numberM() {
+const numbers = [45, 4, 9, 16, 25, 34, 346, 326, 9876, 365, 747, 347, 8675, 2346, 876, 2345];
+
+let txt = "";
+numbers.forEach(myFunction);
+document.getElementById("nAry").innerHTML = txt;
+
+function myFunction(value, index, array) {
+  txt += value + "<br>"; 
+}
+}
+function moreloop() {
+    const qwer = '5 Popups';
+    for(let x=1; x<=5; x++){
+        if (x<=5) {
+            alert(qwer)
+        };
+    }
+            
+        
+    
+</script>
+    
     <body>
 <a href="https://www.w3schools.com/js/js_loop_for.asp">Good reference to Javascript Loops</a><br>
 
@@ -125,67 +188,7 @@ Max loops: <input id="myNum02" type=number value="5" ><br>
 <p id="nAry"></p>
 <input type=button value="loop" onclick="moreloop()">
 
-<script>
 
-function forLoopIf() {
-    document.getElementById('myDiv02').innerHTML = '';
-    let myTemp = '';
-
-    let myMax = parseInt(document.getElementById('myNum02').value);
-
-    for (let myLoop = 0; myLoop < myMax; myLoop++ ){
-
-       if (myLoop * 2 > myMax){
-          myTemp += ' cool '
-      };
-
-      myTemp += 'Loop number: ' + myLoop + '<br>';
-    }
-    document.getElementById('myDiv02').innerHTML = myTemp;
-}
-
-let vWord = "You can make words stack vertically";
-
-let text = "";
-for (let x of vWord) {
-  text += x + "<br>";
-}
-
-document.getElementById("vertWords").innerHTML = text;
-
-function fortword() {
-const bort = ["I love fortnite", "fortnite loves me", "fortnite is life"];
-
-let text = "";
-for (let i = 0; i < bort.length; i++) {
-  text += bort[i] + "<br>";
-}
-
-document.getElementById("fort").innerHTML = text;
-};
-
-function numberM() {
-const numbers = [45, 4, 9, 16, 25, 34, 346, 326, 9876, 365, 747, 347, 8675, 2346, 876, 2345];
-
-let txt = "";
-numbers.forEach(myFunction);
-document.getElementById("nAry").innerHTML = txt;
-
-function myFunction(value, index, array) {
-  txt += value + "<br>"; 
-}
-}
-function moreloop() {
-    const qwer = '5 Popups';
-    for(let x=1; x<=5; x++){
-        if (x<=5) {
-            alert(qwer)
-        };
-    }
-            
-        
-    
-</script>
 
     </body>
     
