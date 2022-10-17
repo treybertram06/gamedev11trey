@@ -45,6 +45,7 @@
 
 <h4> Example working code</h4>
 
+
 Max loops: <input id="myNum01" type=number value="4" ><br> 
 
 <input type=button value="Basic For loop with Decisions" onclick="{
@@ -122,8 +123,14 @@ Max loops: <input id="myNum02" type=number value="5" ><br>
 <p id="fort"></p>
 <input type=button value="numbers go brrrr" onclick="numberM()">
 <p id="nAry"></p>
+<input type=button value="loop" onclick="moreloop()">
 
 <script>
+function moreloop() {
+    document.getElementById('myDiv03').innerHTML = '';
+    for(let x=1; x<=5; x++);
+        alert(x);
+    
 function forLoopIf() {
     document.getElementById('myDiv02').innerHTML = '';
     let myTemp = '';
