@@ -127,9 +127,14 @@ Max loops: <input id="myNum02" type=number value="5" ><br>
 
 <script>
 function moreloop() {
-    document.getElementById('myDiv03').innerHTML = '';
-    for(let x=1; x<=5; x++);
-        alert(x);
+    const qwer = '5 Popups'
+    for(let x=1; x<=5; x++){
+        if (x<=5) {
+            alert(qwer)
+        }
+    }
+            
+        
     
 function forLoopIf() {
     document.getElementById('myDiv02').innerHTML = '';
