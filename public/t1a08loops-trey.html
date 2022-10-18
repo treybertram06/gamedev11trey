@@ -39,13 +39,14 @@ function forLoopIf() {
 }
 </script>
 <script>
+    function vertWords() {
 let vWord = "You can make words stack vertically";
 
 let text = "";
 for (let x of vWord) {
   text += x + "<br>";
 }
-
+    }
 document.getElementById("vertWords").innerHTML = text;
 </script>
 <script>
@@ -192,7 +193,7 @@ Max loops: <input id="myNum02" type=number value="5" ><br>
 <input type=button value="numbers go brrrr" onclick="numberM()">
 <p id="nAry"></p>
 <input type=button value="popup loop" onclick="moreLoop()">
-
+<input type=button value="vertical words" onclick="vertWords()">
 <p id="lCu"></p>
 
 
