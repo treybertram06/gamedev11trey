@@ -75,10 +75,11 @@ function myFunction(value, index, array) {
 </script>
 <script>
 function moreloop() {
-    const qwer = '5 Popups';
+    const L001 = '5 Popups';
     for(let x=1; x<=5; x++){
         if (x<=5) {
-            alert(qwer)
+            
+            document.getElementById("lCu").innerHTML = L001;
         };
     }
             
@@ -192,7 +193,7 @@ Max loops: <input id="myNum02" type=number value="5" ><br>
 <input type=button value="numbers go brrrr" onclick="numberM()">
 <p id="nAry"></p>
 <input type=button value="loop" onclick="moreloop()">
-
+<p id="lCu"></p>
 
 
     </body>
