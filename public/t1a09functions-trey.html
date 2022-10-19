@@ -22,7 +22,17 @@ function myExampleFunction(){
     }
       
 </script>
-    
+    <script>
+function myComplexIf02() {
+  let myIn03 = parseFloat(document.getElementById("myNum03").value);
+  let myIn04 = parseFloat(document.getElementById("myNum04").value);
+  if (myIn03 >= 48 || myIn04 >= 1000) {
+    document.getElementById("ifPrint03").innerHTML = "Happy child";
+  } else { 
+    document.getElementById("ifPrint03").innerHTML = "Cry and go home";
+  }
+}
+    </script>
 <style>
    body {
       background-color: #504DFA;
@@ -70,7 +80,15 @@ Information can also be passed to functions (that's more advanced).
     
    I've already done functions so here's everything again:<br>
     
-   <input type="button" value="Popup using var" onclick="popup01()"><br>
+   <input type="button" value="Popup using var" onclick="popup01()"><br><br>
+	  
+	  How tall are you?<br>
+<input id="myNum03" type=number value="48" ><br>
+How much money do you have? maybe 1000?<br>
+<input id="myNum04" type=number value="0" ><br>
+<input type=button value="Are you tall enough to ride?" onclick="myComplexIf02()">
+<p id="ifPrint03"></p><br><br>
+	  
      Multiplication 
   <form>
     1st Number : <input type="text" 
