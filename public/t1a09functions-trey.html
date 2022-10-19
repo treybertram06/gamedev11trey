@@ -49,7 +49,123 @@ Information can also be passed to functions (that's more advanced).
    document.getElementById('myDiv01').innerHTML =  myExampleFunction()
 }">
 
-<div id="myDiv01">...</div>
+<div id="myDiv01">...</div><br><br><br><br><br><br><br>
+    
+    
+    
+    
+    
+    
+    
+   I've already done functions so here's everything again:<br>
+     Multiplication 
+  <form>
+    1st Number : <input type="text" 
+    id="mfirstNumber" /><br>
+    2nd Number: <input type="text" 
+    id="msecondNumber" /><br>
+    <input type="button" onClick="multiplyBy()" 
+    Value="Multiply" /><br>
+  </form>
+  
+  <p>The Product is : <br>
+   <span id = "mresult"></span>
+  </p>
+  
+  
+  <script>
+    function multiplyBy()
+    {
+      num1 = document.getElementById(
+        "mfirstNumber").value;
+      num2 = document.getElementById(
+        "msecondNumber").value;
+      document.getElementById(
+        "mresult").innerHTML = num1 * num2;
+    }
+  </script><br>
+  Division
+     <form>
+    1st Number : <input type="text" 
+    id="dfirstNumber" /><br>
+    2nd Number: <input type="text" 
+    id="dsecondNumber" /><br>
+    <input type="button" onClick="divideBy()" 
+    Value="Divide" /><br>
+  </form>
+  
+  <p>The Quotient is : <br>
+   <span id = "dresult"></span>
+  </p>
+  
+  
+  <script>
+    function divideBy()
+    {
+      num1 = document.getElementById(
+        "dfirstNumber").value;
+      num2 = document.getElementById(
+        "dsecondNumber").value;
+      document.getElementById(
+        "dresult").innerHTML = num1 / num2;
+    }
+  </script>
+  <br>    
+    
+    
+ <form>
+    1st Number : <input type="number" 
+    id="aFirstNumber" /><br>
+    2nd Number: <input type="number" 
+    id="aSecondNumber" /><br>
+    <input type="button" onClick="addNumber()" 
+    Value="Add" /><br>
+  </form>    
+    
+     <p>The Sum is : <br>
+   <span id = "aresult"></span>
+  </p>
+  
+    
+      <script>
+    function addNumber()
+    {
+      num1 = document.getElementById(
+        "aFirstNumber").value;
+      num2 = document.getElementById(
+        "aSecondNumber").value;
+      document.getElementById(
+        "aresult").innerHTML = num1*1 + num2*1;
+    }
+  </script>
+  <br>    
+
+     <form>
+    1st Number : <input type="number" 
+    id="sFirstNumber" /><br>
+    2nd Number: <input type="number" 
+    id="sSecondNumber" /><br>
+    <input type="button" onClick="minusNumber()" 
+    Value="Subtract" /><br>
+  </form>    
+    
+     <p>The Difference is : <br>
+   <span id = "sresult"></span>
+  </p>
+  
+    
+      <script>
+    function minusNumber()
+    {
+      num1 = document.getElementById(
+        "sFirstNumber").value;
+      num2 = document.getElementById(
+        "sSecondNumber").value;
+      document.getElementById(
+        "sresult").innerHTML = num1*1 - num2*1;
+    }
+  </script>
+   
   </body>
 
 </html>
