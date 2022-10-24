@@ -1,5 +1,23 @@
 <html>
    <head>
+      
+   <script>
+     function onClickUsingFunc() {
+         let myTemp = document.getElementById('myText01').value
+         let mySum = ''
+         document.getElementById('myDiv02').innerHTML = ' '
+      
+         myArray = new Array()
+         myArray[0] = 'Fred'
+         myArray[1] = 'Mary'
+         myArray[2] = 'Zizzy'
+      
+         for (let myLoop=0;   myLoop < myTemp;  myLoop++){
+            mySum += 'Loop #: ' + myLoop + ' array entry: ' + myArray[myLoop] +'<br>'
+         }
+         document.getElementById('myDiv02').innerHTML = mySum
+      }
+      </script>
    <style>
       
    body {
@@ -55,6 +73,7 @@
          document.getElementById('myDiv01').innerHTML = mySum
       }">
       
+      
       <div id="myDiv01">...</div>
       
       
@@ -62,6 +81,14 @@
       
       You do at least 8 other arrays:<br>
       
+      <input type="button" value="Example onClick" onclick="onClickUsingFunc()"
+      
+      
+             
+             
+             
+             
+      <div id="myDiv02">...</div>
    </body>
 
 </html>
