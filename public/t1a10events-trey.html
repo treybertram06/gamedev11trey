@@ -50,7 +50,7 @@
     }
     </script>
     <script>
-    function myFunction(e) {
+    function onMouseMoveFunc(e) {
     var x = e.clientX;
     var y = e.clientY;
     var coor = "Coordinates: (" + x + "," + y + ")";
@@ -117,7 +117,7 @@ function clearCoor() {
    onBlur/onFocus: <br> <input type="text" value="SELECT ME." id="myText04" onblur="onBlurFunc()" onfocus="onFocusFunc()"> <br>
    
    onMouseMove: <br> 
-   <div id="myDiv04" onmousemove="myFunction(event)" onmouseout="clearCoor()"></div>
+   <div id="myDiv04" onmousemove="onMouseMoveFunc(event)" onmouseout="clearCoor()"></div>
    <p id="myP02"></p>
  </body>
  
