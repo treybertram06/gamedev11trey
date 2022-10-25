@@ -33,6 +33,17 @@
     document.getElementById("myP01").innerHTML = "You selected: " + x;
 }
 </script>
+   <script>
+    function onBlurFunc() {
+      var y = document.getElementById("myText03");
+  y.value = y.value.toUpperCase();
+    }
+    </script>
+    <script>
+    function onFocusFunc() {
+     
+    }
+    </script>
   </head>
  
   <body>
@@ -85,6 +96,8 @@
   <option value="Three">Three</option>
   <option value="Four">Four</option>
   </select> <br> <p id="myP01"></p>
+   
+   onBlur/onFocus: <br> <input type="text" value="Try and select and unselect this text box." id="myText04" onblur="onBlurFunc()" onfocus="onFocusFunc()">
  </body>
  
 </html>
