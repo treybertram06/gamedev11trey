@@ -61,6 +61,11 @@ function clearCoor() {
   document.getElementById("myP02").innerHTML = "";
 }
 </script>
+   <script>
+function onKeyDownFunc() {
+  alert("You pressed a key inside the input field");
+}
+</script>
   </head>
  
   <body>
@@ -114,11 +119,14 @@ function clearCoor() {
   <option value="Four">Four</option>
   </select> <br> <p id="myP01"></p>
    
-   onBlur/onFocus: <br> <input type="text" value="SELECT ME." id="myText04" onblur="onBlurFunc()" onfocus="onFocusFunc()"> <br>
+   onBlur/onFocus: <br> <input type="text" value="SELECT ME." id="myText04" onblur="onBlurFunc()" onfocus="onFocusFunc()"> <br><br>
    
    onMouseMove/onMouseOut: <br> 
    <div id="myDiv04" onmousemove="onMouseMoveFunc(event)" onmouseout="clearCoor()"></div>
-   <p id="myP02"></p>
+   <p id="myP02"></p><br>
+   
+   onKeyDown: <br> <input type="text" onkeydown="onKeyDownFunc()">
+   
  </body>
  
 </html>
