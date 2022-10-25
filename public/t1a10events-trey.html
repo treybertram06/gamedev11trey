@@ -41,7 +41,8 @@
     </script>
     <script>
     function onFocusFunc() {
-     
+     var z = document.getElementById("myText04");
+  z.value = z.value.toLowerCase();
     }
     </script>
   </head>
@@ -97,7 +98,7 @@
   <option value="Four">Four</option>
   </select> <br> <p id="myP01"></p>
    
-   onBlur/onFocus: <br> <input type="text" id="myText04" onblur="onBlurFunc()" onfocus="onFocusFunc()">
+   onBlur/onFocus: <br> <input type="text" value="SELECT ME." id="myText04" onblur="onBlurFunc()" onfocus="onFocusFunc()">
  </body>
  
 </html>
