@@ -63,7 +63,7 @@ function clearCoor() {
 </script>
    <script>
 function onKeyDownFunc() {
-  alert("You pressed a key inside the input field");
+  document.getElementById("myDiv05").innerHTML = "You typed in the box.";
 }
 </script>
   </head>
@@ -125,7 +125,7 @@ function onKeyDownFunc() {
    <div id="myDiv04" onmousemove="onMouseMoveFunc(event)" onmouseout="clearCoor()"></div>
    <p id="myP02"></p><br>
    
-   onKeyDown: <br> <input type="text" onkeydown="onKeyDownFunc()">
+   onKeyDown: <br> <input type="text" value="Type in the box." onkeydown="onKeyDownFunc()"><br> <div id="myDiv05">...</div> <br>
    
  </body>
  
