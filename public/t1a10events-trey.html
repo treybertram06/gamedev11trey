@@ -14,7 +14,11 @@
       padding: 10px;
       
      }
-     
+     .myDiv04 {
+  width: 200px;
+  height: 100px;
+  border: 1px solid black;
+}
   </style>
    
    <script>
@@ -35,16 +39,28 @@
 </script>
    <script>
     function onBlurFunc() {
-      var y = document.getElementById("myText04");
-  y.value = y.value.toUpperCase();
+    var y = document.getElementById("myText04");
+    y.value = y.value.toUpperCase();
     }
     </script>
     <script>
     function onFocusFunc() {
-     var z = document.getElementById("myText04");
-  z.value = z.value.toLowerCase();
+    var z = document.getElementById("myText04");
+    z.value = z.value.toLowerCase();
     }
     </script>
+    <script>
+    function myFunction(e) {
+    var x = e.clientX;
+    var y = e.clientY;
+    var coor = "Coordinates: (" + x + "," + y + ")";
+    document.getElementById("myP02").innerHTML = coor;
+}
+
+function clearCoor() {
+  document.getElementById("myP02").innerHTML = "";
+}
+</script>
   </head>
  
   <body>
@@ -98,7 +114,11 @@
   <option value="Four">Four</option>
   </select> <br> <p id="myP01"></p>
    
-   onBlur/onFocus: <br> <input type="text" value="SELECT ME." id="myText04" onblur="onBlurFunc()" onfocus="onFocusFunc()">
+   onBlur/onFocus: <br> <input type="text" value="SELECT ME." id="myText04" onblur="onBlurFunc()" onfocus="onFocusFunc()"> <br>
+   
+   onMouseMove: <br> 
+   <div id="myDiv04" onmousemove="myFunction(event)" onmouseout="clearCoor()"></div>
+   <p id="myP02"></p>
  </body>
  
 </html>
