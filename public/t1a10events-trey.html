@@ -94,7 +94,11 @@ function drop(event) {
   event.target.appendChild(document.getElementById(data));
 }
 </script>
-
+<script>
+function onCopyFunc() {
+  document.getElementById("myP04").innerHTML = "You copied text!"
+}
+</script>
   </head>
  
   <body>
@@ -163,6 +167,9 @@ function drop(event) {
 <div class="droptarget" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
 
 <p id="myP03"></p><br><br><br>
+   
+   onCopy:
+   <input type="text" oncopy="onCopyFunc()" value="Try to copy this text"> <br> <p id="myP04"></p>
  </body>
  
 </html>
