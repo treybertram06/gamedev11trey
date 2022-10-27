@@ -116,6 +116,7 @@
       }
      }
       </script>
+      
        <script>
      function stupidArrayFunc06() {
          let myTemp = document.getElementById('myText07').value
@@ -124,10 +125,10 @@
       
         let myArray = new Array(2)
         
-        for (let myLoop=0;   myLoop < myTemp;  myLoop++){
+        for (let myLoop=0;   myLoop <= myTemp;  myLoop++){
             myArray[myLoop] = new Array()
-            for (let myLoopOther=0;   myLoopOther < myTemp;  myLoopOther++){
-            myArray[myLoop] = Math.round(Math.random()*10)
+            for (let myLoopOther=0;   myLoopOther <= myTemp;  myLoopOther++){
+            myArray[myLoop][myLoopOther] = Math.round(Math.random()*10)
             }   
         }
          for (let myx=0;   myx < myTemp;  myx++){
