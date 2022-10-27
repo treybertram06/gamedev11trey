@@ -100,6 +100,21 @@
           
       
       </script>
+       <script>
+     function stupidArrayFunc05() {
+         let myTemp = document.getElementById('myText06').value
+         let mySum = ''
+         document.getElementById('myDiv03').innerHTML = ' '
+      
+        let myArray = [ [1, 2], [3, 4], [5, 6] ];
+        
+         for (let myx=0;   myx < myTemp;  myx++){
+            for (let myy=0;   myy < myTemp;  myy++){
+            mySum += 'Iteration #: ' + myx + ', ' + myy + ' array entry: ' + myArray[myx][myy] +'<br>'
+         }
+         document.getElementById('myDiv07').innerHTML = mySum
+      }
+      </script>
    <style>
       
    body {
@@ -186,6 +201,10 @@
       <input type="button" value="Go button" onclick="stupidArrayFunc04()"
       <br> <div id="myDiv06">...</div><br><br>   
       
+       i love 2d array:<br>
+      <input type="text" id="myText06" value="2"><br>
+      <input type="button" value="Go button" onclick="stupidArrayFunc05()"
+      <br> <div id="myDiv07">...</div><br><br>   
    </body>
 
 </html>
