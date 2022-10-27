@@ -63,6 +63,24 @@
          document.getElementById('myDiv04').innerHTML = mySum
       }
       </script>
+      <script>
+     function stupidArrayFunc03() {
+         let myRand = Math.round(Math.random()*11-1)
+         let mySum = ''
+         document.getElementById('myDiv05').innerHTML = ' '
+      
+         myArray = new Array()
+         myArray[0] = myRand
+         myArray[1] = myRand
+         myArray[2] = myRand
+         myArray[3] = myRand 
+        
+         for (let myLoop=0;   myLoop < 10;  myLoop++){
+            mySum += 'Loop #: ' + myLoop + ' array entry: ' + myArray[myLoop] +'<br>'
+         }
+         document.getElementById('myDiv05').innerHTML = mySum
+      }
+      </script>
    <style>
       
    body {
@@ -138,7 +156,11 @@
       i love array:<br>
       <input type="text" id="myText04" value="7"><br>
       <input type="button" value="Go button" onclick="stupidArrayFunc02()"
-      <br> <div id="myDiv04">...</div><br><br>     
+      <br> <div id="myDiv04">...</div><br><br>   
+      
+      i love array:<br>
+      <input type="button" value="Go button" onclick="stupidArrayFunc03()"
+      <br> <div id="myDiv05">...</div><br><br>  
       
    </body>
 
