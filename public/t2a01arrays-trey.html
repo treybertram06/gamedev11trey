@@ -81,6 +81,20 @@
          document.getElementById('myDiv05').innerHTML = mySum
       }
       </script>
+       <script>
+     function stupidArrayFunc04() {
+         let myTemp = document.getElementById('myText05').value
+         let mySum = ''
+         document.getElementById('myDiv06').innerHTML = ' '
+      
+         myArray = new Array().fill(Math.round(Math.random()*10))
+        
+         for (let myLoop=0;   myLoop < myTemp;  myLoop++){
+            mySum += 'Loop #: ' + myLoop + ' array entry: ' + myArray[myLoop] +'<br>'
+         }
+         document.getElementById('myDiv06').innerHTML = mySum
+      }
+      </script>
    <style>
       
    body {
