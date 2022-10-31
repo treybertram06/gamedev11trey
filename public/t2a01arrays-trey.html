@@ -17,8 +17,7 @@
          }
          document.getElementById('myDiv02').innerHTML = mySum
       }
-      </script>
-      <script>
+ 
      function stupidArrayFunc01() {
          let myTemp = document.getElementById('myText03').value
          let mySum = ''
@@ -35,8 +34,7 @@
          }
          document.getElementById('myDiv03').innerHTML = mySum
       }
-      </script>
-      <script>
+   
      function stupidArrayFunc02() {
          let myTemp = document.getElementById('myText04').value
          let mySum = ''
@@ -62,8 +60,7 @@
          }
          document.getElementById('myDiv04').innerHTML = mySum
       }
-      </script>
-      <script>
+ 
      function stupidArrayFunc03() {
          let myRand = Math.round(Math.random()*10)
          let mySum = ''
@@ -80,28 +77,28 @@
          }
          document.getElementById('myDiv05').innerHTML = mySum
       }
-      </script>
-       <script>
+   
      function stupidArrayFunc04() {
          let myTemp = document.getElementById('myText05').value
          let mySum = ''
          document.getElementById('myDiv06').innerHTML = ' '
-        function rNum() {
-         Math.round(Math.random()*10)  
-        }
-      
+       
          let myArray = new Array()
-         myArray = Math.round(Math.random()*10)
         
-         for (let myLoop=0;   myLoop < myTemp;  myLoop++){
+         for (let myLoop=0;   myLoop <= myTemp;  myLoop++){
             mySum += 'Loop #: ' + myLoop + ' array entry: ' + myArray[myLoop] +'<br>'
-         }
+        }
+        for (let myLoop=0;   myLoop <= myTemp;  myLoop++){
+            myArray[myLoop] = new Array()
+            for (let myLoopOther=0;   myLoopOther <= myTemp;  myLoopOther++){
+            myArray[myLoop][myLoopOther] = Math.round(Math.random()*10)
+            }   
+        }
          document.getElementById('myDiv06').innerHTML = mySum
       }
           
       
-      </script>
-       <script>
+    
      function stupidArrayFunc05() {
          let myTemp = document.getElementById('myText06').value
          let mySum = ''
@@ -116,9 +113,7 @@
          document.getElementById('myDiv07').innerHTML = mySum
       }
      }
-      </script>
-      
-       <script>
+   
      function stupidArrayFunc06() {
          let myTemp = document.getElementById('myText07').value
          let mySum = ''
@@ -231,7 +226,7 @@
       <input type="button" value="Go button" onclick="stupidArrayFunc05()"
       <br> <div id="myDiv07">...</div><br><br>   
       
-       i love 2d array:<br>
+       i love infinite 2d array:<br>
       <input type="text" id="myText07" value="2"><br>
       <input type="button" value="Go button" onclick="stupidArrayFunc06()"
       <br> <div id="myDiv08">...</div><br><br>   
