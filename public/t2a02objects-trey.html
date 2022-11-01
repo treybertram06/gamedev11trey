@@ -1,7 +1,50 @@
 <html>
   
   <head>
-  
+   <script>
+      function objectFunc01() {
+         const cars = {car01:"Ford", car02:"Honda", car03:"Chevy", car04:"Dodge"}
+
+         document.getElementById('myDiv02').innerHTML = '<br>Cars Object has properties: <br>'
+         document.getElementById('myDiv02').innerHTML += 'Car1: ' + cars.car01 + '<br>'
+         document.getElementById('myDiv02').innerHTML += 'Car2: ' + cars.car02 + '<br>'
+         document.getElementById('myDiv02').innerHTML += 'Car3: ' + cars.car03 + '<br>'
+         document.getElementById('myDiv02').innerHTML += 'Car4: ' + cars.car04 + '<br>'
+         document.getElementById('myDiv02').innerHTML += 'Car of your choice: ' + document.getElementById('myText02').value + '<br>'
+      }
+      </script>
+      <script>
+         function objectFunc02() {
+            const bikes = {bike01:"Specialized", bike02:"Canyon", bike03:"Commencial", bike04:"Santa Cruz"}
+   
+            document.getElementById('myDiv03').innerHTML = '<br>Bikes Object has properties: <br>'
+            document.getElementById('myDiv03').innerHTML += 'Bike1: ' + bikes.bike01 + '<br>'
+            document.getElementById('myDiv03').innerHTML += 'Bike2: ' + bikes.bike02 + '<br>'
+            document.getElementById('myDiv03').innerHTML += 'Bike3: ' + bikes.bike03 + '<br>'
+            document.getElementById('myDiv03').innerHTML += 'Bike4: ' + bikes.bike04 + '<br>'
+            document.getElementById('myDiv03').innerHTML += 'Bike of your choice: ' + document.getElementById('myText03').value + '<br>'
+         }
+         </script>
+         <script>
+            function objectFunc03() {
+               const manyNum = {num01:Math.round(Math.random()*10), num02:Math.round(Math.random()*10), num03:Math.round(Math.random()*10), num04:Math.round(Math.random()*10)}
+      
+               document.getElementById('myDiv04').innerHTML = '<br>manyNum Object has properties: <br>'
+               document.getElementById('myDiv04').innerHTML += 'Num1: ' + manyNum.num01 + '<br>'
+               document.getElementById('myDiv04').innerHTML += 'Num2: ' + manyNum.num02 + '<br>'
+               document.getElementById('myDiv04').innerHTML += 'Num3: ' + manyNum.num03 + '<br>'
+               document.getElementById('myDiv04').innerHTML += 'Num4: ' + manyNum.num04 + '<br>'
+            }
+            </script>
+            <script>
+               function objectFunc04() {
+                  let brainHurty = {'myArray':[3, 6, 9, 12, 15, 18, 21, 24, 27, 30]}
+         
+                  document.getElementById('myDiv05').innerHTML = '<br>brainHurty Object has an array hiding inside: <br>'
+                  document.getElementById('myDiv05').innerHTML += 'Array Value: ' + brainHurty.myArray[document.getElementById('myText04').value] + '<br>'
+
+               }
+               </script>
      <style>
   
     body {
@@ -39,7 +82,7 @@ Objects are stored named variables
 
 <h4> Example working Objects code</h4>
 
-Nothing: <input type="text" id="myText01" value="Useless at the moment"><br>
+Nothing: <input type="text" id="myText01" value="this is boxInput"><br>
 
 
 <input type="button" value="Example Object Set and Show" onclick="{
@@ -53,7 +96,10 @@ Nothing: <input type="text" id="myText01" value="Useless at the moment"><br>
 
    document.getElementById('myDiv01').innerHTML = '<br>myPerson Object has properties: <br>'
    document.getElementById('myDiv01').innerHTML += 'firstName: ' + myPerson.firstName + '<br>'
-   document.getElementById('myDiv01').innerHTML += 'You do the others  <br> ' 
+   document.getElementById('myDiv01').innerHTML += 'lastName: ' + myPerson.lastName + '<br>'
+   document.getElementById('myDiv01').innerHTML += 'age: ' + myPerson.age + '<br>'
+   document.getElementById('myDiv01').innerHTML += 'eyeColor: ' + myPerson.eyeColor + '<br>'
+   document.getElementById('myDiv01').innerHTML += 'Box entry: ' + document.getElementById('myText01').value + '<br>'
 
 }">
 
@@ -61,6 +107,28 @@ Nothing: <input type="text" id="myText01" value="Useless at the moment"><br>
 
 
 <br>
+
+
+Object list using function:<br>
+<input type="text" id="myText02" value="type in car"><br>
+<input type="button" value="Example Object Set and Show(with func)" onclick="objectFunc01()">
+<div id="myDiv02">...</div><br>
+
+Object list using function... again:<br>
+<input type="text" id="myText03" value="type in bike"><br>
+<input type="button" value="Example Object Set and Show(with func)" onclick="objectFunc02()">
+<div id="myDiv03">...</div><br>
+
+Object list of random numbers:<br>
+<input type="button" value="Example Object Set and Show" onclick="objectFunc03()">
+<div id="myDiv04">...</div><br>
+
+Object list of random numbers:<br>
+<input type="text" id="myText04" value="5"><br>
+<input type="button" value="Example Object Set and Show" onclick="objectFunc04()">
+<div id="myDiv05">...</div><br>
+
+
 
 
 
