@@ -45,6 +45,19 @@
 
                }
                </script>
+               <script>
+                  const img = document.querySelector("img"); 
+                  img.src = "https://pbs.twimg.com/media/EtZ_6FVXUAw5rHt.png";
+                  function objectFunc05() {
+                     const manyPhoto = {pic01: document.getElementById('img').innerHTML , pic02:"https://pbs.twimg.com/media/EtZ_6FVXUAw5rHt.png", pic03:"https://pbs.twimg.com/media/EtZ_6FVXUAw5rHt.png", pic04:"https://pbs.twimg.com/media/EtZ_6FVXUAw5rHt.png"}
+            
+                     document.getElementById('myDiv06').innerHTML = '<br>manyPhoto Object has properties: <br>'
+                     document.getElementById('myDiv06').innerHTML += 'Pic1: ' + manyPhoto.pic01 + '<br>'
+                     document.getElementById('myDiv06').innerHTML += 'Pic2: ' + manyPhoto.pic02 + '<br>'
+                     document.getElementById('myDiv06').innerHTML += 'Pic3: ' + manyPhoto.pic03 + '<br>'
+                     document.getElementById('myDiv06').innerHTML += 'Pic4: ' + manyPhoto.pic04 + '<br>'
+                  }
+                  </script>
      <style>
   
     body {
@@ -128,7 +141,10 @@ Object list of random numbers:<br>
 <input type="button" value="Example Object Set and Show" onclick="objectFunc04()">
 <div id="myDiv05">...</div><br>
 
-
+Object list of photos:<br>
+<input type="text" id="myText04" value="5"><br>
+<input type="button" value="Example Object Set and Show" onclick="objectFunc05()">
+<div id="myDiv06">...</div><br>
 
 
 
