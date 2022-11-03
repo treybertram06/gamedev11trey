@@ -1,0 +1,258 @@
+<html>
+
+<head>
+   <style>
+  
+      body {
+        background-color: #8fb6f1;
+        color: black;
+        font-family: serif;
+        outline-style: solid;
+        outline-color: #5b02e9;
+        outline-width: thick;
+        padding: 10px;
+        
+      }
+   
+    </style>
+
+   <script>
+      function classFunc01() {
+      class myAnimal {
+          constructor(passName, passAge) {
+             this.myName = passName;
+             this.myAge = passAge;
+            }
+          myShow(){    
+             document.getElementById('myDiv02').innerHTML = 'Hello '+ this.myName + '. You are ' + this.myAge + ' years old<br>'
+          }
+      }  // end class myAnimal
+       myDog = new myAnimal('Snickers', 5)
+       myDog.myShow()    
+      }
+   </script>
+
+   <script>
+      function classFunc02() {
+      class mySquare {
+          constructor(passHeight, passWidth) {
+             this.myHeight = passHeight;
+             this.myWidth = passWidth;
+            }
+          myShow(){    
+             document.getElementById('myDiv03').innerHTML = 'Square is '+ this.myHeight + 'cm, by ' + this.myWidth + 'cm.<br>'
+          }
+      }
+       myEvenR = new mySquare(5, 5)
+       myEvenR.myShow()    
+      }
+   </script>
+
+   <script>
+      function classFunc03() {
+      class myMath {
+          constructor(passInt01, passInt02) {
+             this.myInt01 = passInt01;
+             this.myInt02 = passInt02;
+            }
+          myShow(){    
+             document.getElementById('myDiv04').innerHTML =  this.myInt01;
+            
+          }
+      }
+       mySum = new myMath(Math.round(Math.random()*100) + Math.round(Math.random()*100))
+       mySum.myShow()    
+      }
+</script>
+
+<script>
+   function classFunc04() {
+   class Car {
+     constructor(name, year) {
+       this.name = name;
+       this.year = year;
+   
+     }
+     age() {
+       let date = new Date();
+       return date.getFullYear() - this.year;
+     }
+   }
+
+   let myCar = new Car("Ford", 2014);
+document.getElementById("myDiv05").innerHTML =
+"My car is " + myCar.age() + " years old.";
+   }
+</script>
+
+<script>
+   function classFunc05() {
+      class sWrite {
+         constructor(dText) {
+            this.dText = dText;
+         }
+
+         myShow() {
+            document.getElementById('myDiv06').innerHTML = this.dText
+         }
+      }
+      let test = new sWrite("Test.")
+   test.myShow()
+   }
+   
+</script>
+
+<script>
+   function classFunc06() {
+      class myMath {
+         constructor(adding) {
+            this.adding = adding;
+         }
+
+         myShow() {
+            document.getElementById("myDiv07").innerHTML = int01 + " + " + int02 + " = " + this.adding;
+         }
+      }
+      let int01 = Math.round(Math.random()*1000)
+      let int02 = Math.round(Math.random()*1000)
+      let sum = new myMath(int01 + int02)
+      sum.myShow()
+   }
+</script>
+
+<script>
+   function classFunc07() {
+      class myMath {
+         constructor(subtract) {
+            this.subtract = subtract;
+         }
+
+         myShow() {
+            document.getElementById("myDiv08").innerHTML = int01 + " - " + int02 + " = " + this.subtract;
+         }
+      }
+      let int01 = Math.round(Math.random()*1000)
+      let int02 = Math.round(Math.random()*1000)
+      let difference = new myMath(int01 - int02)
+      difference.myShow()
+   }
+</script>
+
+<script>
+   function classFunc08() {
+      class myMath {
+         constructor(multi) {
+            this.multi = multi;
+         }
+
+         myShow() {
+            document.getElementById("myDiv09").innerHTML = int01 + " * " + int02 + " = " + this.multi;
+         }
+      }
+      let int01 = Math.round(Math.random()*1000)
+      let int02 = Math.round(Math.random()*1000)
+      let product = new myMath(int01 * int02)
+      product.myShow()
+   }
+</script>
+
+<script>
+   function classFunc09() {
+      class myMath {
+         constructor(divi) {
+            this.divi = divi;
+         }
+
+         myShow() {
+            document.getElementById("myDiv10").innerHTML = int01 + " / " + int02 + " = " + this.divi;
+         }
+      }
+      let int01 = Math.round(Math.random()*1000)
+      let int02 = Math.round(Math.random()*1000)
+      let quotient = new myMath(int01 / int02)
+      quotient.myShow()
+   }
+</script>
+
+   </head>
+   <body>
+Version 0.0.1
+<h2 align=center>T2A03-Classes-by-Trey.html</h2>
+
+<a href="https://www.w3schools.com/js/js_classes.asp">Find a good reference to Javascript Classes</a><br>
+Classes are both Objects that store variables (Called Properties) and Functions
+that work on the variables (called Methods)
+
+<h4> Example Classses code</h4>
+<pre>
+ class myAnimal {
+    constructor(passName, passAge) {
+       this.myName = passName;
+       this.myAge = passAge;
+    }
+    myShow(){    
+       document.getElementById('myDiv01').innerHTML = 'Hello '+ this.myName + '. You are ' + this.myAge + ' years old<br>'
+    }
+   myDog = new myAnimal('Snickers', 5)
+   myDog.myShow()  
+
+</pre>
+
+<h4> Example working Classes code</h4>
+Nothing: <input type=text id="myText01" value="Useless at the moment"><br>
+<input type=button value="Example Class Set and Show Class Animal" onClick="{
+ class myAnimal {
+    constructor(passName, passAge) {
+       this.myName = passName;
+       this.myAge = passAge;
+    }
+    myShow(){    
+       document.getElementById('myDiv01').innerHTML = 'Hello '+ this.myName + '. You are ' + this.myAge + ' years old<br>'
+    }
+ }  // end class myAnimal
+   myDog = new myAnimal('Snickers', 5)
+   myDog.myShow()  
+
+}">
+
+<div id="myDiv01">...</div>
+
+Same thing but easy to read: <br>
+<input type=button value="Example Class Set and Show Class Animal" onClick="classFunc01()"> <br>
+<div id="myDiv02">...</div>
+
+Squares: <br>
+<input type=button value="Example Class Set and Show Class mySquare" onClick="classFunc02()"> <br>
+<div id="myDiv03">...</div>
+
+Stupidly complex random number generator: <br>
+<input type=button value="1-200" onClick="classFunc03()"> <br>
+<div id="myDiv04">...</div>
+
+How old is my car: <br>
+<input type=button value="go button" onClick="classFunc04()"> <br>
+<div id="myDiv05">...</div>
+
+Written completely from my brain: <br>
+<input type=button value="go button" onClick="classFunc05()"> <br>
+<div id="myDiv06">...</div>
+
+More breain words: <br>
+<input type=button value="adds two random numbers, 0-2000" onClick="classFunc06()"> <br>
+<div id="myDiv07">...</div>
+
+More breain words: <br>
+<input type=button value="subtracts two random numbers, (-1000)-(+1000)" onClick="classFunc07()"> <br>
+<div id="myDiv08">...</div>
+
+More breain words: <br>
+<input type=button value="multiply two random numbers, 0-1,000,000" onClick="classFunc08()"> <br>
+<div id="myDiv09">...</div>
+
+More breain words: <br>
+<input type=button value="divide two random numbers, 0-1000" onClick="classFunc09()"> <br>
+<div id="myDiv10">...</div>
+
+</body>
+
+</html>
