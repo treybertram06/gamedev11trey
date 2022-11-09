@@ -1,0 +1,91 @@
+<html>
+
+   <head>
+      <script>
+         function salary() {
+            let mySalary = document.getElementById('mySalary').value
+            let myHours = document.getElementById('myHours').value
+            let myBracket = document.getElementById('myBracket').value
+            let myTax = 1 - ((myBracket*1)*0.01)
+            let totalEarnedD = (mySalary*1) * (myHours*1)
+            let totalEarnedW = (totalEarnedD*1) * 5
+            let totalEarnedY = (totalEarnedW*1)*52
+            let totalEarnedDT = (totalEarnedD*1) * (myTax*1)
+            let totalEarnedWT = (totalEarnedW*1) * (myTax*1)
+            let totalEarnedYT = Math.round((totalEarnedY*1) * (myTax*1))
+            document.getElementById('myDiv01').innerHTML = totalEarnedD
+            document.getElementById('myDiv02').innerHTML = totalEarnedW
+            document.getElementById('myDiv03').innerHTML = totalEarnedY
+            document.getElementById('myDiv04').innerHTML = totalEarnedDT
+            document.getElementById('myDiv05').innerHTML = totalEarnedWT
+            document.getElementById('myDiv06').innerHTML = totalEarnedYT
+
+            var a = document.getElementById("myTable").rows[1].cells;
+           a[1].innerHTML = document.getElementById("myDiv01").innerHTML;
+           var b = document.getElementById("myTable").rows[1].cells;
+           b[2].innerHTML = document.getElementById("myDiv02").innerHTML;
+           var c = document.getElementById("myTable").rows[2].cells;
+           c[1].innerHTML = document.getElementById("myDiv03").innerHTML;
+           var d = document.getElementById("myTable").rows[2].cells;
+           d[2].innerHTML = document.getElementById("myDiv04").innerHTML;
+           var e = document.getElementById("myTable").rows[3].cells;
+           e[1].innerHTML = document.getElementById("myDiv05").innerHTML;
+           var f = document.getElementById("myTable").rows[3].cells;
+           f[2].innerHTML = document.getElementById("myDiv06").innerHTML;
+         }
+         </script>
+
+<style>
+      
+   body {
+      background-color: #6765C2;
+      color: black;
+      font-family: serif;
+      outline-style: solid;
+      outline-color: #262476;
+      outline-width: thick;
+      padding: 10px;
+      
+       }
+      
+  </style>
+
+   </head>
+   <body>
+      <h4>Version 0.0.1</h4>
+      <h1 align="center">
+      T2A12-Pay-by-Trey.html
+      </h1>
+      <br><br>
+      Taxes Calculator:<br><br>
+      Salary (Hourly): $<input type="number" id="mySalary" value="15"> 
+      Hours/Day: <input type="number" id="myHours" value="8"> 
+      Tax Bracket: <input type="number" id="myBracket" value="30">% <br>
+      <input type="button" value="Do my taxes." onclick="salary()">
+      <br><br>
+
+      Daily Salary Pre-Tax:<br>
+      <div id="myDiv01">...</div><br><br>
+      Weekly Salary Pre-Tax:<br>
+      <div id="myDiv02">...</div><br><br>
+      Yearly Salary Pre-Tax:<br>
+      <div id="myDiv03">...</div><br><br>
+
+      Daily Salary Post-Tax:<br>
+      <div id="myDiv04">...</div><br><br>
+      Weekly Salary Post-Tax:<br>
+      <div id="myDiv05">...</div><br><br>
+      Yearly Salary Post-Tax:<br>
+      <div id="myDiv06">...</div><br><br>
+
+
+      <table id="myTable" border=1>
+         <tr><td>Salary:</td><td>Pre-Tax</td><td>Post-Tax</td></tr>
+         <tr><td>Daily</td><td>a</td><td>a</td></tr>
+         <tr><td>Weekly</td><td>a</td><td>a</td></tr>
+         <tr><td>Yearly</td><td>a</td><td>a</td></tr>
+       </table><br>
+ 
+
+   </body>
+</html>
