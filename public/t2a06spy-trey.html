@@ -1,0 +1,102 @@
+
+<h1 align=center>t2a06-spy-name.html</h1>
+<textarea id="myArea01" rows=4 cols=70>Hello how are you</textarea><br> 
+
+
+<input type=button value="encrypt" onclick="{
+   let myTemp = ''
+   myString = document.getElementById('myArea01').value.toLowerCase().split('')
+   for (let myLoop=0;   myLoop < myString.length; myLoop++){
+      myTemp = myString[myLoop]
+      if (myString[myLoop] == 'e') {myTemp  = 'f'} 
+      if (myString[myLoop] == 'h') {myTemp  = 'i'} 
+      myString[myLoop] = myTemp
+   }
+   document.getElementById('myArea02').value = myString.join('')
+}"><br><br>
+
+
+
+<textarea id="myArea02" rows=4 cols=70></textarea><br> 
+
+<input type=button value="decrypt" onclick="{
+   alert('Sorry, you have to do this!')
+}"><br><br>
+
+
+<textarea id="myArea03" rows=4 cols=70></textarea><br> 
+
+<br<br><br><br<br><br><br<br><br><br<br><br>
+
+My work: <br>
+
+
+<script>
+   function encryptbasic() {
+   let myTemp = ''
+   myString = document.getElementById('myArea04').value.toLowerCase().split('')
+   for (let myLoop=0;   myLoop < myString.length; myLoop++){
+      myTemp = myString[myLoop]
+      if (myString[myLoop] == 'e') {myTemp  = 'f'} 
+      if (myString[myLoop] == 'h') {myTemp  = 'i'} 
+      myString[myLoop] = myTemp
+   }
+   document.getElementById('myArea05').value = myString.join('')
+}
+
+function decryptbasic() {
+   let myTemp = ''
+   myString = document.getElementById('myArea05').value.toLowerCase().split('')
+   for (let myLoop=0;   myLoop < myString.length; myLoop++){
+      myTemp = myString[myLoop]
+      if (myString[myLoop] == 'f') {myTemp  = 'e'} 
+      if (myString[myLoop] == 'i') {myTemp  = 'h'} 
+      myString[myLoop] = myTemp
+   }
+   document.getElementById('myArea06').value = myString.join('')
+}
+</script>
+
+<textarea id="myArea04" rows=4 cols=70>Hello how are you</textarea><br> 
+
+<input type=button value="encrypt" onclick="encryptbasic()"><br><br>
+
+<textarea id="myArea05" rows=4 cols=70></textarea><br> 
+
+<input type=button value="decrypt" onclick="decriptbasic()"><br><br>
+
+<textarea id="myArea06" rows=4 cols=70></textarea><br> 
+
+<br<br><br><br<br><br><br<br><br><br<br><br>
+
+<h1 align="center">Encription done with base64 </h1>
+    
+    <script>
+        // base64 encoded text is in the text box below
+        var base64 = "SGVsbG8gV29ybGQh";
+        // decode the base64 encoded text
+        var text = atob(base64);
+        // display the decoded text
+        document.write();
+
+    </script>
+
+    <textarea id="base64" rows="10" cols="50"></textarea><br>
+    <button onclick="encode()">Encrypt</button>
+    <button onclick="decode()">Decrypt</button>
+    <script>
+        function encode() {
+            var text = document.getElementById("base64").value;
+            var base64 = btoa(text);
+            document.getElementById("base64").value = base64;
+        }
+        function decode() {
+            // get the base64 encoded text
+            var base64 = document.getElementById("base64").value;
+            // decode the base64 encoded text
+            var text = atob(base64);
+            // display the decoded text in a div element with id="result"
+            document.getElementById("base64").value = text;
+        }
+    </script>
+    <div id="result"></div> 
