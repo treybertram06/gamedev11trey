@@ -4,7 +4,7 @@
     Full working sample actually is:
 
     <script>
-
+    function gotime() {
 
     var encrypted = CryptoJS.AES.encrypt("Message", "Secret Passphrase");
     //U2FsdGVkX18ZUVvShFSES21qHsQEqZXMxQ9zgHy+bu0=
@@ -16,6 +16,7 @@
     document.getElementById("demo1").innerHTML = encrypted;
     document.getElementById("demo2").innerHTML = decrypted;
     document.getElementById("demo3").innerHTML = decrypted.toString(CryptoJS.enc.Utf8);
+    }
       </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous">
@@ -34,7 +35,7 @@
 <label>Actual Message</label>
 <div id="demo3"></div>
 
-
+<input type="button" value="gogo" onclick="gotime()">
 
 
 </html>
