@@ -4,8 +4,8 @@
     <script>
     function gotime() {
 
-        var eMessage = document.getElementById("message").innerHTML;
-        var tryPassword = document.getElementById("password").innerHTML;
+        var eMessage = document.getElementById("message").value;
+        var tryPassword = document.getElementById("password").value;
 
     var encrypted = CryptoJS.AES.encrypt(eMessage, "Password1!");
     //U2FsdGVkX18ZUVvShFSES21qHsQEqZXMxQ9zgHy+bu0=
