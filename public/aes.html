@@ -6,10 +6,13 @@
     <script>
     function gotime() {
 
-    var encrypted = CryptoJS.AES.encrypt("Message", "Secret Passphrase");
+        var eMessage = document.getElementById("message").innerHTML;
+        var tryPassword = document.getElementById("password").innerHTML;
+
+    var encrypted = CryptoJS.AES.encrypt(eMessage, "Password1!");
     //U2FsdGVkX18ZUVvShFSES21qHsQEqZXMxQ9zgHy+bu0=
     
-    var decrypted = CryptoJS.AES.decrypt(encrypted, "Secret Passphrase");
+    var decrypted = CryptoJS.AES.decrypt(encrypted, tryPassword);
     //4d657373616765
     
     
@@ -23,6 +26,9 @@
     
         </script>
 
+
+<input type="text" id="message" value="Message"><br>
+<input type="text" id="password" value="Password1!"><br>
 <br><br>
 <label>encrypted</label>
 <div id="demo1"></div>
