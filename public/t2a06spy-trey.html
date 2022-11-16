@@ -1,149 +1,134 @@
+<head>
+   <style>
+      
+      body {
+         background-color: #908fff;
+         color: rgb(0, 0, 0)55, 255, 255);
+         font-family: serif;
+         outline-style: solid;
+         outline-color: #262476;
+         outline-width: thick;
+         padding: 10px;
+         
+          }
+         
+     </style>
 
+   <script>
+      function encryptbasic() {
+         let myTemp = ''
+          myString = document.getElementById('myArea01').value.toLowerCase().split('')
+          for (let myLoop=0;   myLoop < myString.length; myLoop++){
+             myTemp = myString[myLoop]
+             if (myString[myLoop] == 'e') {myTemp  = 'f'} 
+             if (myString[myLoop] == 'h') {myTemp  = 'i'} 
+             myString[myLoop] = myTemp
+          }
+          document.getElementById('myArea02').value = myString.join('')
+   }
+   
+   function decryptbasic() {
+      let myTemp = ''
+          myString = document.getElementById('myArea02').value.toLowerCase().split('')
+          for (let myLoop=0;   myLoop < myString.length; myLoop++){
+             myTemp = myString[myLoop]
+               if (myString[myLoop] == 'f') {myTemp  = 'e'}
+               if (myString[myLoop] == 'i') {myTemp  = 'h'}
+               myString[myLoop] = myTemp
+          }
+            document.getElementById('myArea03').value = myString.join('')
+   }
+   </script>
+
+   <script>
+   // base64 encoded text is in the text box below
+   var base64 = "SGVsbG8gV29ybGQh";
+   // decode the base64 encoded text
+   var text = atob(base64);
+   // display the decoded text
+   document.write();
+
+   </script>
+
+   <script>
+   function encode() {
+       var text = document.getElementById("myArea01").value;
+       var base64 = btoa(text);
+       document.getElementById("myArea02").value = base64;
+   }
+   function decode() {
+       // get the base64 encoded text
+       var base642 = document.getElementById('myArea02').value
+       // decode the base64 encoded text
+       var myText = atob(base642);
+       // display the decoded text in myArea03 text area
+       document.getElementById("myArea03").value = myText;
+   }
+   </script>
+
+   <script>
+   function gotime() {
+
+       var eMessage = document.getElementById("message").value;
+       var tryPassword = document.getElementById("password").value;
+
+   var encrypted = CryptoJS.AES.encrypt(eMessage, "Password1!");
+   //U2FsdGVkX18ZUVvShFSES21qHsQEqZXMxQ9zgHy+bu0=
+   
+   var decrypted = CryptoJS.AES.decrypt(encrypted, tryPassword);
+   //4d657373616765
+   
+   
+   document.getElementById("demo1").innerHTML = encrypted;
+   document.getElementById("demo2").innerHTML = decrypted;
+   document.getElementById("demo3").innerHTML = decrypted.toString(CryptoJS.enc.Utf8);
+   }
+   </script>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous">
+   </script>
+</head>
 <h1 align=center>t2a06-spy-name.html</h1>
+<br>
+
+
+
+
 <textarea id="myArea01" rows=4 cols=70>Hello how are you</textarea><br> 
 
-
-<input type=button value="encrypt" onclick="{
-   let myTemp = ''
-   myString = document.getElementById('myArea01').value.toLowerCase().split('')
-   for (let myLoop=0;   myLoop < myString.length; myLoop++){
-      myTemp = myString[myLoop]
-      if (myString[myLoop] == 'e') {myTemp  = 'f'} 
-      if (myString[myLoop] == 'h') {myTemp  = 'i'} 
-      myString[myLoop] = myTemp
-   }
-   document.getElementById('myArea02').value = myString.join('')
-}"><br><br>
-
-
+<input type=button value="Normal Encrypt" onclick="encryptbasic()">
+<button onclick="encode()">Encrypt Base64</button><br><br>
 
 <textarea id="myArea02" rows=4 cols=70></textarea><br> 
 
-<input type=button value="decrypt" onclick="{
-   alert('Sorry, you have to do this!')
-}"><br><br>
-
+<input type=button value="Normal Decrypt" onclick="decryptbasic()">
+<button onclick="decode()">Decrypt Base64</button><br><br>
 
 <textarea id="myArea03" rows=4 cols=70></textarea><br> 
 
 <br<br><br><br<br><br><br<br><br><br<br><br>
 
-My work: <br>
-
-
-<script>
-   function encryptbasic() {
-   let myTemp = ''
-   myString = document.getElementById('myArea04').value.toLowerCase().split('')
-   for (let myLoop=0;   myLoop < myString.length; myLoop++){
-      myTemp = myString[myLoop]
-      if (myString[myLoop] == 'e') {myTemp  = 'f'} 
-      if (myString[myLoop] == 'h') {myTemp  = 'i'} 
-      myString[myLoop] = myTemp
-   }
-   document.getElementById('myArea05').value = myString.join('')
-}
-
-function decryptbasic() {
-   let myTemp = ''
-   myString = document.getElementById('myArea05').value.toLowerCase().split('')
-   for (let myLoop=0;   myLoop < myString.length; myLoop++){
-      myTemp = myString[myLoop]
-      if (myString[myLoop] == 'f') {myTemp  = 'e'} 
-      if (myString[myLoop] == 'i') {myTemp  = 'h'} 
-      myString[myLoop] = myTemp
-   }
-   document.getElementById('myArea06').value = myString.join('')
-}
-</script>
-
-<textarea id="myArea04" rows=4 cols=70>Hello how are you</textarea><br> 
-
-<input type=button value="encrypt" onclick="encryptbasic()"><br><br>
-
-<textarea id="myArea05" rows=4 cols=70></textarea><br> 
-
-<input type=button value="decrypt" onclick="decriptbasic()"><br><br>
-
-<textarea id="myArea06" rows=4 cols=70></textarea><br> 
-
-<br<br><br><br<br><br><br<br><br><br<br><br>
-
-<h1 align="center">Encription done with base64 </h1>
-    
-    <script>
-        // base64 encoded text is in the text box below
-        var base64 = "SGVsbG8gV29ybGQh";
-        // decode the base64 encoded text
-        var text = atob(base64);
-        // display the decoded text
-        document.write();
-
-    </script>
-
-    <textarea id="base64" rows="10" cols="50"></textarea><br>
-    <button onclick="encode()">Encrypt</button>
-    <button onclick="decode()">Decrypt</button>
-    <script>
-        function encode() {
-            var text = document.getElementById("base64").value;
-            var base64 = btoa(text);
-            document.getElementById("base64").value = base64;
-        }
-        function decode() {
-            // get the base64 encoded text
-            var base64 = document.getElementById("base64").value;
-            // decode the base64 encoded text
-            var text = atob(base64);
-            // display the decoded text in a div element with id="result"
-            document.getElementById("base64").value = text;
-        }
-    </script>
-    <div id="result"></div> 
-<br><br><br><br><br><br><br><br>
 
 <h1 align=center>SHA256 Encryption</h1>
 <br><br>
 
 Full working sample actually is:<br><br>
 
-    <script>
-    function gotime() {
 
-        var eMessage = document.getElementById("message").value;
-        var tryPassword = document.getElementById("password").value;
-
-    var encrypted = CryptoJS.AES.encrypt(eMessage, "Password1!");
-    //U2FsdGVkX18ZUVvShFSES21qHsQEqZXMxQ9zgHy+bu0=
-    
-    var decrypted = CryptoJS.AES.decrypt(encrypted, tryPassword);
-    //4d657373616765
-    
-    
-    document.getElementById("demo1").innerHTML = encrypted;
-    document.getElementById("demo2").innerHTML = decrypted;
-    document.getElementById("demo3").innerHTML = decrypted.toString(CryptoJS.enc.Utf8);
-    }
-      </script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous">
-    
-        </script>
 
 Type in your message:<br>
 <input type="text" id="message" value="Message"><br><br>
 Type in your password (Password1!):<br>
 <input type="text" id="password" value="Password1!"><br><br>
-<br><br>
-<label>encrypted</label>
+<input type="button" value="gogo" onclick="gotime()"><br><br>
+<label>Encrypted:</label>
 <div id="demo1"></div>
 <br>
 
-<label>decrypted</label>
+<label>Decrypted:</label>
 <div id="demo2"></div>
 
 <br>
-<label>Actual Message</label>
-<div id="demo3"></div>
+<label>Actual Message:</label>
+<div id="demo3"></div><br><br>
 
-<input type="button" value="gogo" onclick="gotime()">
