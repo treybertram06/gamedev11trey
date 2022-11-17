@@ -20,6 +20,17 @@
   document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 10 + 'px'
   myCheckHit()     // checks for all collisions
 }
+   
+   function goLeft() {
+  document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + -10 + 'px'
+  myCheckHit()     // checks for all collisions
+}
+
+   function goUp() {
+  document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + -10 + 'px'
+  myCheckHit()     // checks for all collisions
+}
+
 
    // global functions here
 function myHitOther(my1,my2){
@@ -69,11 +80,13 @@ function myCheckHit(){
       document.getElementById('myBody').style.backgroundPosition = myTemp
   }, 100)
     
-}">
+}"><br><br>
 
 
 <input type=button value="Image Right Fast Button" onTouchStart="{this.click(); event.preventDefault();}" onclick="goRight()"><br>
-<input type=button value="Image Down Fast Button" onTouchStart="{this.click(); event.preventDefault();}" onclick="goDown()"><br><br>
+<input type=button value="Image Down Fast Button" onTouchStart="{this.click(); event.preventDefault();}" onclick="goDown()"><br>
+<input type=button value="Image Left Fast Button" onTouchStart="{this.click(); event.preventDefault();}" onclick="goLeft()"><br>
+<input type=button value="Image Up Fast Button" onTouchStart="{this.click(); event.preventDefault();}" onclick="goUp()"><br><br>
 
 
 
