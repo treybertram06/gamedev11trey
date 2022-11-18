@@ -16,6 +16,15 @@
 
 <h1 align=center>t2a11 Game Template by Fred</h1>
 <br><br><br><br>
+   
+   <script>
+eventTarget.addEventListener("keydown", (event) => {
+  if (event.isComposing || event.keyCode === 39) {
+    return;
+  }
+  goRight()
+})
+   </script>
 
 <script>
 
@@ -100,6 +109,4 @@ function myCheckHit(){
 <input type=button value="Image Down Fast Button" onTouchStart="{this.click(); event.preventDefault();}" onclick="goDown()"><br>
 
 <br>
-
-
 
