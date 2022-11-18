@@ -18,13 +18,27 @@
 <br><br><br><br>
    
    <script>
-var x = event.key;
+document.onkeydown = function(e) {
+    switch (e.keyCode) {
+        case 65: // a
+            document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 10 + 'px'
+            myCheckHit()     // checks for all collisions
+            break;
+        case 68: // d
+            document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px'
+            myCheckHit()     // checks for all collisions
+            break;
+        case 87: // w
+            document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 10 + 'px'
+            myCheckHit()     // checks for all collisions
+            break;
+        case 83: // s
+            document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 10 + 'px'
+            myCheckHit()     // checks for all collisions
+            break;
+    }
+};
 
-// If the pressed keyboard button is "a" or "A" (using caps lock or shift), alert some text.
-
-if (x == "a" || x == "A") {
-  goLeft();
-}
    </script>
 
 <script>
