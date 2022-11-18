@@ -18,12 +18,13 @@
 <br><br><br><br>
    
    <script>
-eventTarget.addEventListener("keydown", (event) => {
-  if (event.isComposing || event.keyCode === 39) {
-    return;
-  }
-  goRight()
-})
+var x = event.key;
+
+// If the pressed keyboard button is "a" or "A" (using caps lock or shift), alert some text.
+
+if (x == "a" || x == "A") {
+  goLeft();
+}
    </script>
 
 <script>
