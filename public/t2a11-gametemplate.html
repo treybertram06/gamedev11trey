@@ -46,6 +46,7 @@ document.onkeydown = function(e) {
    // global variables here
    let myGlobalX = 0
    let myClock
+   
 
    function goRight() {
   document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px'
@@ -88,17 +89,24 @@ function myHitOther(my1,my2){
 
 
 function myCheckHit(){
-   if ( myHitOther('myImg01','myImg02') ){
-       alert('you lose')  
-       document.getElementById('myImg01').style.left = '20px'
-       location = 'gameFail.bat'  // go to your next level
+    var myKey = 0
+   if ( myHitOther('myImg01','myImg02') && myKey == 1){
+       alert('you win')
    }
+
+   if ( myHitOther('myImg01','myImg02') && myKey == 0){
+     alert('you lose') 
+   }
+
 
    if ( myHitOther('myImg01','myImg03') ){
        alert('you now have a key') 
+       var myKey = 1
        //now you have a key
-         document.getElementById('myImg03').style.visibility = 'hidden'
-         
+        document.getElementById('myDiv01').innerHTML = myKey
+         document.getElementById('myImg03').style.width = '0'
+         document.getElementById('myImg03').style.height = '0'
+
        
        
 
@@ -135,5 +143,5 @@ function myCheckHit(){
 <input type=button value="Image Left Fast Button" onTouchStart="{this.click(); event.preventDefault();}" onclick="goLeft()">
 <input type=button value="Image Right Fast Button" onTouchStart="{this.click(); event.preventDefault();}" onclick="goRight()"><br>
 <input type=button value="Image Down Fast Button" onTouchStart="{this.click(); event.preventDefault();}" onclick="goDown()"><br>
-
+<div id="myDiv01">...</div>
 <br>
