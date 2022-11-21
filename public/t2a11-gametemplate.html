@@ -18,6 +18,10 @@
 <br><br><br><br>
    
    <script>
+
+    let myKey = 0
+
+
 document.onkeydown = function(e) {
     switch (e.keyCode) {
         case 65: // a
@@ -89,8 +93,8 @@ function myHitOther(my1,my2){
 
 
 function myCheckHit(){
-    var myKey = 0
-   if ( myHitOther('myImg01','myImg02') && myKey == 1){
+    myKey = 0
+   if ( myHitOther('myImg01','myImg02') && myKey > 0){
        alert('you win')
    }
 
@@ -101,21 +105,18 @@ function myCheckHit(){
 
    if ( myHitOther('myImg01','myImg03') ){
        alert('you now have a key') 
-       var myKey = 1
-       //now you have a key
-        document.getElementById('myDiv01').innerHTML = myKey
+        myKey = 1
+      
+        document.getElementById('howManyKeys').innerHTML = myKey
          document.getElementById('myImg03').style.width = '0'
          document.getElementById('myImg03').style.height = '0'
-
-       
-       
-
-
        
    }
 
+  
 
-   // more if statements here like the above
+
+
 
 
 
@@ -143,5 +144,5 @@ function myCheckHit(){
 <input type=button value="Image Left Fast Button" onTouchStart="{this.click(); event.preventDefault();}" onclick="goLeft()">
 <input type=button value="Image Right Fast Button" onTouchStart="{this.click(); event.preventDefault();}" onclick="goRight()"><br>
 <input type=button value="Image Down Fast Button" onTouchStart="{this.click(); event.preventDefault();}" onclick="goDown()"><br>
-<div id="myDiv01">...</div>
+<textbox id="howManyKeys"></textbox>
 <br>
