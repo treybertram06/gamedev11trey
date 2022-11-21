@@ -94,6 +94,18 @@ function myCheckHit(){
        location = 'gameFail.bat'  // go to your next level
    }
 
+   if ( myHitOther('myImg01','myImg03') ){
+       alert('you now have a key') 
+       //now you have a key
+         document.getElementById('myImg03').style.visibility = 'hidden'
+         
+       
+       
+
+
+       
+   }
+
 
    // more if statements here like the above
 
@@ -106,6 +118,7 @@ function myCheckHit(){
 
 <img id="myImg01" style="position:absolute; width:100px; height:80px; top:0px; left:50px;"  src="bort.jpg">
 <img id="myImg02" style="position:absolute; width:100px; height:80px; top:0px; left:250px;" src="trap.jpg">
+<img id="myImg03" style="position:absolute; width:100px; height:80px; top:0px; left:450px;" src="goldpump.jpg">
 
 <input type=button value="Auto Background Left" onclick="{
   clearInterval(myClock)
@@ -124,4 +137,3 @@ function myCheckHit(){
 <input type=button value="Image Down Fast Button" onTouchStart="{this.click(); event.preventDefault();}" onclick="goDown()"><br>
 
 <br>
-
