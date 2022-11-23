@@ -1,148 +1,319 @@
-<h6> Version 0.0.1 </h6>
-
+<html>
 <head>
-   <style>
-      
-      #myImg02 {
-       outline-style: solid;
-      outline-color: red;
-      outline-width: thin;  
-      }
-   
-      </style>
 </head>
+<body>
+    <canvas id="canvas" width="500" height="500"></canvas>
+    <script>
+        //top down shooter game using canvas and will be using letters to represent the player and enemies 
+        //the player will be represented by the letter "P" and the enemies will be represented by the letter "E"
+        //the player will be able to move around the map and shoot at the enemies
+        //the enemies will be able to move around the map and shoot at the player
 
-<body id="myBody" style="background-repeat:repeat; background-size: 80%" background="Season_1_Map.jpg">
+        //the player will be able to move around the map using the w,a,s,d keys
+        //the player will be able to shoot at the enemies using the click of the mouse
 
-<h1 align=center>t2a11 Game Template by Fred</h1>
-<br><br><br><br>
-   
-   <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
 
-    let myKey = 0
+        var player = {
+            x: 0,
+            y: 0,
+            width: 10,
+            height: 10,
+            color: "blue"
+        };
+
+        var enemies = [];
+
+        var bullets = [];
+
+        var keys = [];
+
+        var score = 0;
+
+        var gameOver = false;
+
+        var enemySpeed = 1;
+
+        var bulletSpeed = 10;
+
+        var enemySpawnRate = 1000;
+
+        var enemySpawnRateIncrease = 0.5;
+
+        var enemySpawnRateIncreaseInterval = 1000;
+
+        var enemySpawnRateIncreaseTimer = 0;
 
 
-document.onkeydown = function(e) {
-    switch (e.keyCode) {
-        case 65: // a
-            document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 10 + 'px'
-            myCheckHit()     // checks for all collisions
-            break;
-        case 68: // d
-            document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px'
-            myCheckHit()     // checks for all collisions
-            break;
-        case 87: // w
-            document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 10 + 'px'
-            myCheckHit()     // checks for all collisions
-            break;
-        case 83: // s
-            document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 10 + 'px'
-            myCheckHit()     // checks for all collisions
-            break;
+        function drawPlayer() {
+            ctx.fillStyle = player.color;
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+        }
+
+        function drawEnemies() {
+            for (var i = 0; i < enemies.length; i++) {
+                ctx.fillStyle = enemies[i].color;
+                ctx.fillRect(enemies[i].x, enemies[i].y, enemies[i].width, enemies[i].height);
+            }
+        }
+
+        function drawBullets() {
+            for (var i = 0; i < bullets.length; i++) {
+                ctx.fillStyle = bullets[i].color;
+                ctx.fillRect(bullets[i].x, bullets[i].y, bullets[i].width, bullets[i].height);
+            }
+        }
+
+        function drawScore() {
+            ctx.fillStyle = "black";
+            ctx.font = "30px Arial";
+            ctx.fillText("Score: " + score, 10, 30);
+        }
+
+        function drawGameOver() {
+            ctx.fillStyle = "black";
+            ctx.font = "30px Arial";
+            ctx.fillText("Game Over", 10, 30);
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (!gameOver) {
+                drawPlayer();
+                drawEnemies();
+                drawBullets();
+                drawScore();
+            } else {
+                drawGameOver();
+            }
+        }
+
+        function update() {
+            if (!gameOver) {
+                updatePlayer();
+                updateEnemies();
+                updateBullets();
+                updateScore();
+            }
+        }
+
+        function updatePlayer() {
+            if (keys[87]) {
+                player.y -= 5;
+            }
+            if (keys[83]) {
+                player.y += 5;
+            }
+            if (keys[65]) {
+                player.x -= 5;
+            }
+            if (keys[68]) {
+                player.x += 5;
+            }
+
+            if (player.x < 0) {
+                player.x = 0;
+            }
+            if (player.x > canvas.width - player.width) {
+                player.x = canvas.width - player.width;
+            }
+            if (player.y < 0) {
+                player.y = 0;
+            }
+            if (player.y > canvas.height - player.height) {
+                player.y = canvas.height - player.height;
+            }
+        }
+
+        function updateEnemies() {
+            for (var i = 0; i < enemies.length; i++) {
+                enemies[i].x += enemies[i].xSpeed;
+                enemies[i].y += enemies[i].ySpeed;
+
+                if (enemies[i].x < 0 || enemies[i].x > canvas.width - enemies[i].width) {
+                    enemies[i].xSpeed *= -1;
+                }
+                if (enemies[i].y < 0 || enemies[i].y > canvas.height - enemies[i].height) {
+                    enemies[i].ySpeed *= -1;
+                }
+            }
+        }
+
+        function updateBullets() {
+            for (var i = 0; i < bullets.length; i++) {
+                bullets[i].x += bullets[i].xSpeed;
+                bullets[i].y += bullets[i].ySpeed;
+
+                if (bullets[i].x < 0 || bullets[i].x > canvas.width || bullets[i].y < 0 || bullets[i].y > canvas.height) {
+                    bullets.splice(i, 1);
+                    i--;
+                }
+            }
+        }
+
+        function updateScore() {
+            score++;
+        }
+
+        function spawnEnemy() {
+            var enemy = {
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                width: 60,
+                height: 60,
+                color: "red",
+                xSpeed: Math.random() * enemySpeed - enemySpeed / 2,
+                ySpeed: Math.random() * enemySpeed - enemySpeed / 2
+            };
+
+            enemies.push(enemy);
+        }
+
+        function spawnBullet() {
+            var bullet = {
+                x: player.x + player.width / 2,
+                y: player.y + player.height / 2,
+                width: 10,
+                height: 10,
+                color: "black",
+                xSpeed: Math.cos(player.angle) * bulletSpeed,
+                ySpeed: Math.sin(player.angle) * bulletSpeed
+            };
+
+            bullets.push(bullet);
+        }
+
+        function checkCollisions() {
+            for (var i = 0; i < enemies.length; i++) {
+                for (var j = 0; j < bullets.length; j++) {
+                    console.log(i);
+                    console.log(enemies[i].x);
+                    if(i > 0){
+                        if (enemies[i].x < bullets[j].x + bullets[j].width &&
+                            enemies[i].x + enemies[i].width > bullets[j].x &&
+                            enemies[i].y < bullets[j].y + bullets[j].height &&
+                            enemies[i].y + enemies[i].height > bullets[j].y) {
+                            enemies.splice(i, 1);
+                            bullets.splice(j, 1);
+                            i--;
+                            j--;
+                        }
+                    } 
+                }
+            }
+        }
+
+        function checkGameOver() {
+            for (var i = 0; i < enemies.length; i++) {
+                if (enemies[i].x < player.x + player.width &&
+                    enemies[i].x + enemies[i].width > player.x &&
+                    enemies[i].y < player.y + player.height &&
+                    enemies[i].y + enemies[i].height > player.y) {
+                    gameOver = true;
+                }
+            }
+        }
+
+        function loop() {
+            draw();
+            update();
+            checkCollisions();
+            checkGameOver();
+
+            if (!gameOver) {
+                requestAnimationFrame(loop);
+            }
+
+            if (gameOver == true) {
+                alert("Game Over");
+                //window.location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+            }
+        }
+
+        function init() {
+            canvas = document.getElementById("canvas");
+            ctx = canvas.getContext("2d");
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            player = {
+                x: canvas.width / 2,
+                y: canvas.height / 2,
+                width: 60,
+                height: 60,
+                color: "blue",
+                angle: 0
+            };
+
+            document.addEventListener("keydown", function (e) {
+                keys[e.keyCode] = true;
+            });
+
+            document.addEventListener("keyup", function (e) {
+                keys[e.keyCode] = false;
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                var rect = canvas.getBoundingClientRect();
+
+               player.angle = Math.atan2(e.clientY - rect.top - player.y - player.height / 2, e.clientX - rect.left - player.x - player.width / 2);
+                
+
+
+
+            });
+
+            document.addEventListener("mousedown", function (e) {
+                spawnBullet();
+            });
+            document.addEventListener('keydown', function(event) {
+    if(event.keyCode == 39) {
+        player.angle = 0
+        spawnBullet()
     }
-};
+    else if(event.keyCode == 40) {
+        player.angle = 1.5708
+        spawnBullet()
+    }
+    else if(event.keyCode == 37) {
+        player.angle = 3.14159
+        spawnBullet()
+    }
+    else if(event.keyCode == 38) {
+        player.angle = 4.71239
+        spawnBullet()
+    }
+});
 
-   </script>
+            setInterval(function () {
+                spawnEnemy();
+            }, enemySpawnRate);
 
-<script>
+            setInterval(function () {
+                enemySpawnRate -= enemySpawnRateIncrease;
+            }, enemySpawnRateIncreaseInterval);
 
-   // global variables here
-   let myGlobalX = 0
-   let myClock
-   
+            loop();
+        }
 
-   function goRight() {
-  document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px'
-  myCheckHit()     // checks for all collisions
-}
-   
-   function goDown() {
-  document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 10 + 'px'
-  myCheckHit()     // checks for all collisions
-}
-   
-   function goLeft() {
-  document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + -10 + 'px'
-  myCheckHit()     // checks for all collisions
-}
+        init();
 
-   function goUp() {
-  document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + -10 + 'px'
-  myCheckHit()     // checks for all collisions
-}
+        //spawnBullet in direction of arrow keys
 
+        
+    </script>
+    <style>
+        body {
+            margin: 0;
+        }
 
-   // global functions here
-function myHitOther(my1,my2){
-   left1   = parseInt(document.getElementById(my1).style.left)
-   right1  = left1 + parseInt(document.getElementById(my1).style.width)
-   top1    = parseInt(document.getElementById(my1).style.top)   
-   bottom1 = top1   + parseInt(document.getElementById(my1).style.height)
-   left2   = parseInt(document.getElementById(my2).style.left)
-   right2  = left2 + parseInt(document.getElementById(my2).style.width)
-   top2    = parseInt(document.getElementById(my2).style.top)   
-   bottom2 = top2   + parseInt(document.getElementById(my2).style.height)
-   if ((right1  >=  left2  ) &&      	   
-       (bottom1 >=  top2   ) &&
-       (left1   <=  right2 ) &&
-       (top1    <=  bottom2) ){
-       return true
-   }
-}
+        #canvas {
+            background-color: #eee;
+            align-content: flex-start;
+        }
 
-
-function myCheckHit(){
-    myKey = 0
-   if ( myHitOther('myImg01','myImg02') && myKey > 0){
-       alert('you win')
-   }
-
-   if ( myHitOther('myImg01','myImg02') && myKey == 0){
-     alert('you lose') 
-   }
-
-
-   if ( myHitOther('myImg01','myImg03') ){
-       alert('you now have a key') 
-        myKey = 1
-      
-        document.getElementById('howManyKeys').innerHTML = myKey
-         document.getElementById('myImg03').style.width = '0'
-         document.getElementById('myImg03').style.height = '0'
-       
-   }
-
-  
-
-
-
-
-
-
-}  // end of myCheckHit()
-
-
-</script>
-
-<img id="myImg01" style="position:absolute; width:100px; height:80px; top:0px; left:50px;"  src="bort.jpg">
-<img id="myImg02" style="position:absolute; width:100px; height:80px; top:0px; left:250px;" src="trap.jpg">
-<img id="myImg03" style="position:absolute; width:100px; height:80px; top:0px; left:450px;" src="goldpump.jpg">
-
-<input type=button value="Auto Background Left" onclick="{
-  clearInterval(myClock)
-  let myTemp = '100px 0px'
-  myClock = setInterval(function(){
-      myGlobalX -= 5
-      myTemp =  myGlobalX + 'px 0px'
-      document.getElementById('myBody').style.backgroundPosition = myTemp
-  }, 100)
-    
-}"><br><br>
-
-<input type=button value="Image Up Fast Button" onTouchStart="{this.click(); event.preventDefault();}" onclick="goUp()"><br>
-<input type=button value="Image Left Fast Button" onTouchStart="{this.click(); event.preventDefault();}" onclick="goLeft()">
-<input type=button value="Image Right Fast Button" onTouchStart="{this.click(); event.preventDefault();}" onclick="goRight()"><br>
-<input type=button value="Image Down Fast Button" onTouchStart="{this.click(); event.preventDefault();}" onclick="goDown()"><br>
-<textbox id="howManyKeys"></textbox>
-<br>
+    </style>
+</body>
