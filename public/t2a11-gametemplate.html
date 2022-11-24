@@ -2,8 +2,17 @@
 <head>
 </head>
 <body>
-    <canvas id="canvas" width="500" height="500"></canvas>
+    <canvas id="canvas" width="1" height="1"></canvas>
+
     <script>
+
+        window.addEventListener("keydown", function(e) {
+        if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+        e.preventDefault();
+         }
+        }, false);
+
+        function gameStart() {
         //top down shooter game using canvas and will be using letters to represent the player and enemies 
         //the player will be represented by the letter "P" and the enemies will be represented by the letter "E"
         //the player will be able to move around the map and shoot at the enemies
@@ -33,17 +42,27 @@
 
         var gameOver = false;
 
-        var enemySpeed = 1;
+        var enemySpeed = document.getElementById("varEnemySpeed").value;
+    
+        var bulletSpeed = document.getElementById("varBulletSpeed").value;
 
-        var bulletSpeed = 10;
+        var enemySpawnRate = document.getElementById("varEnemySpawnRate").value;
 
-        var enemySpawnRate = 1000;
+        var enemySpawnRateIncrease = document.getElementById("varEnemySpawnRateIncrease").value;
 
-        var enemySpawnRateIncrease = 0.5;
+        var enemySpawnRateIncreaseInterval = document.getElementById("varEnemySpawnRateIncreaseInterval").value;
 
-        var enemySpawnRateIncreaseInterval = 1000;
+        var enemySpawnRateIncreaseTimer = document.getElementById("varEnemySpawnRateIncreaseTimer").value;
+            
+            console.log(enemySpawnRate, enemySpawnRateIncrease, enemySpawnRateIncreaseInterval, enemySpawnRateIncreaseTimer, enemySpeed, bulletSpeed);
+           
 
-        var enemySpawnRateIncreaseTimer = 0;
+        
+
+           
+ 
+
+        
 
 
         function drawPlayer() {
@@ -303,11 +322,12 @@
 
         //spawnBullet in direction of arrow keys
 
-        
+    }
     </script>
     <style>
         body {
             margin: 0;
+            text-align: center;
         }
 
         #canvas {
@@ -316,4 +336,53 @@
         }
 
     </style>
+     <style>
+        body {
+            background-color: rgb(255, 0, 0);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            background-position: 0px 0px;
+            color: white;
+            text-align: center;
+
+        }
+
+        #myTitle {
+            font-size: 50px;
+            font-family: "Times New Roman", Times, serif;
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 0px;
+        }
+
+        #styGameStart {
+            margin-top: 100px;
+            margin-bottom: 0px;
+            color: blue;
+            background-color: blue;
+            
+        }
+
+    </style>
+    <br>
+
+    <h1 id="myTitle">Top-Down Shooter</h1><br><br>
+
+    <h2>Options:</h2><br>
+        var enemySpeed = <input type="number" value="1" id="varEnemySpeed">;<br><br>
+
+        var bulletSpeed = <input type="number" value="10" id="varBulletSpeed">;<br><br>
+
+        var enemySpawnRate = <input type="number" value="1000" id="varEnemySpawnRate">;<br><br>
+
+        var enemySpawnRateIncrease = <input type="number" value="0.5" id="varEnemySpawnRateIncrease">;<br><br>
+
+        var enemySpawnRateIncreaseInterval = <input type="number" value="1000" id="varEnemySpawnRateIncreaseInterval">;<br><br>
+
+        var enemySpawnRateIncreaseTimer = <input type="number" value="0" id="varEnemySpawnRateIncreaseTimer">;<br>
+
+
+    
+        <input type="image" id="styGameStart" src="startbutton.png" onclick="gameStart()"> 
+
 </body>
