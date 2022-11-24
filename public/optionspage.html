@@ -1,1 +1,60 @@
-meow
+<html>
+
+    <head>
+        <style>
+            body {
+                background-color: rgb(255, 0, 0);
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                background-position: 0px 0px;
+                color: white;
+                text-align: center;
+            }
+            #myTitle {
+                font-size: 50px;
+                font-family: "Times New Roman", Times, serif;
+                text-align: center;
+                margin-top: 50px;
+                margin-bottom: 0px;
+            }
+           
+        </style>
+
+        <script>
+            function saveOptions() {
+            var enemySpeed = document.getElementById("varEnemySpeed").value;
+            var bulletSpeed = document.getElementById("varBulletSpeed").value;
+            var enemySpawnRate = document.getElementById("varEnemySpawnRate").value;
+            var enemySpawnRateIncrease = document.getElementById("varEnemySpawnRateIncrease").value;
+            var enemySpawnRateIncreaseInterval = document.getElementById("varEnemySpawnRateIncreaseInterval").value;
+            var enemySpawnRateIncreaseTimer = document.getElementById("varEnemySpawnRateIncreaseTimer").value;
+            
+            console.log(enemySpawnRate, enemySpawnRateIncrease, enemySpawnRateIncreaseInterval, enemySpawnRateIncreaseTimer, enemySpeed, bulletSpeed);
+            }
+        </script>
+
+    </head>
+
+
+    <body>
+        <h1 id="myTitle">Options</h1><br><br>
+
+        var enemySpeed = <input type="number" value="1" id="varEnemySpeed">;<br><br>
+
+        var bulletSpeed = <input type="number" value="10" id="varBulletSpeed">;<br><br>
+
+        var enemySpawnRate = <input type="number" value="1000" id="varEnemySpawnRate">;<br><br>
+
+        var enemySpawnRateIncrease = <input type="number" value="0.5" id="varEnemySpawnRateIncrease">;<br><br>
+
+        var enemySpawnRateIncreaseInterval = <input type="number" value="1000" id="varEnemySpawnRateIncreaseInterval">;<br><br>
+
+        var enemySpawnRateIncreaseTimer = <input type="number" value="0" id="varEnemySpawnRateIncreaseTimer">;<br><br>
+
+        <button onclick="saveOptions()">Save</button>
+
+    </body>
+
+
+
+</html>
