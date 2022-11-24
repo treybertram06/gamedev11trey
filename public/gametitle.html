@@ -1,0 +1,79 @@
+<html>
+
+<head>
+
+    
+
+    <style>
+        body {
+            background-color: rgb(255, 0, 0);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            background-position: 0px 0px;
+            color: white;
+            text-align: center;
+
+        }
+
+        #myTitle {
+            font-size: 50px;
+            font-family: "Times New Roman", Times, serif;
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 0px;
+        }
+
+        #styGameStart {
+            margin-top: 100px;
+            margin-bottom: 0px;
+            color: blue;
+            background-color: blue;
+            
+        }
+
+    </style>
+
+    <script>
+
+ 
+
+        function startGame() {
+                    window.location.replace("https://bkfitx.github.io/gamedev11trey/public/t2a11-gametemplate.html");
+                }
+
+        function startOptions() {
+                    window.location.replace("https://bkfitx.github.io/gamedev11trey/public/optionspage.html");
+                }
+            var enemySpeed = document.getElementById("enemySpeed").value;
+
+var bulletSpeed = 10;
+
+var enemySpawnRate = 1000;
+
+var enemySpawnRateIncrease = 0.5;
+
+var enemySpawnRateIncreaseInterval = 1000;
+
+var enemySpawnRateIncreaseTimer = 0;
+
+
+
+        
+    
+    </script>
+
+</head>
+
+<body>
+
+    <b><h1 id="myTitle">Top-Down Shooter Game</h1></b>
+
+    
+    <input type="image" id="styGameStart" src="startbutton.png" onclick="startGame()">  <br>
+    <input type="image" id="styGameStart" src="optionsbutton.png" onclick="startOptions()"> <br>
+    <input type="number" id="enemySpeed" value="1" min="1" max="10" step="1">
+
+
+</body>
+
+</html>
