@@ -1,6 +1,41 @@
 
-<h2 align=center>t2a08-canvas by Fred</h2>
+<h2 align=center>T2A08 Canvas by Trey</h2>
 You use loops and variables to make fast fancy drawings <br><br>
+
+<script>
+
+function drawSquare(x, y, size){
+  myContext.fillStyle = "red";
+  myContext.fillRect(100,100,200,200);
+}
+
+function drawRect(x, y, size){
+  myContext.fillStyle = "red";
+  myContext.fillRect(200,200,200,400);
+}
+
+function drawLine(){
+  myContext.beginPath();
+  myContext.moveTo(0,0);
+  myContext.lineTo(200,200);
+  myContext.stroke();
+}
+
+function drawCurve(){
+  myContext.beginPath();
+  myContext.moveTo(0,0);
+  myContext.quadraticCurveTo(200,200,400,0);
+  myContext.stroke();
+}
+</script>
+
+<input type="button" value="fillrect" onclick="drawSquare()">
+
+<input type="button" value="fillrect" onclick="drawRect()">
+
+<input type="button" value="line" onclick="drawLine()">
+
+<input type="button" value="curve" onclick="drawCurve()">
 
 <input type=button value=".lineTo(30,200)" onclick="{
    myContext.beginPath();
@@ -67,3 +102,15 @@ You use loops and variables to make fast fancy drawings <br><br>
    let myCanvas=document.getElementById('myCoolTag');
    let myContext=myCanvas.getContext('2d');
 </script>
+<style>
+   body {
+    background-color: #5BFF8F;
+    color: black;
+    font-family: serif;
+    outline-style: solid;
+    outline-color: #388C53;
+    outline-width: thick;
+    padding: 10px;
+    
+     }
+</style> 
