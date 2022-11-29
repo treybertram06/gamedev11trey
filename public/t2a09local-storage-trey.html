@@ -1,11 +1,33 @@
+<style>
+      
+   body {
+      background-color: #6765C2;
+      color: black;
+      font-family: serif;
+      outline-style: solid;
+      outline-color: #262476;
+      outline-width: thick;
+      padding: 10px;
+      
+       }
+      
+  </style>
 
-<h2>t2a09-local-storage-name by Fred. Instructions:</h2>
+<h2 align="center">T2A09 Local Storage by Trey.</h2><br>
+
+
+<br>
 
 <body onload="{
    myStorage = localStorage.getItem('myStoredText')
    if(myStorage  != null){
       document.getElementById('myText1').value = myStorage 
     }
+
+    myVariables = localStorage.getItem('myStoredScore, myStoredLevel, myStoredLives')
+      if(myVariables  != null){
+         document.getElementById('myDiv1').value = myVariables 
+      }
 }">
 
 <body onunload="{
@@ -24,5 +46,59 @@ Text example: <input id="myText1" type=text size=70 value="" placeholder="Write 
    document.getElementById('myText1').value = localStorage.getItem('myStoredText')
 }"> 
 
+<input type="button" value="Clear Text" onClick="{
+   localStorage.removeItem('myStoredText')
+   document.getElementById('myText1').value = ''
+}"><br><br>
+
+
+You could store variables for a game:
+
+<script>
+   function clearV() {
+   localStorage.removeItem('myStoredScore')
+   localStorage.removeItem('myStoredLives')
+   localStorage.removeItem('myStoredLevel')
+   refresh()
+   alert('Variables have been cleared')
+}
+
+   function storeV() {
+   localStorage.setItem('myStoredScore', myScore)
+   localStorage.setItem('myStoredLives', myLives)
+  localStorage.setItem('myStoredLevel', myLevel)
+   refresh()
+   alert('Variables have been stored')
+}
+
+function retrieveV() {
+   myScore = localStorage.getItem('myStoredScore')
+   myLives = localStorage.getItem('myStoredLives')
+   myLevel = localStorage.getItem('myStoredLevel')
+   refresh()
+   alert('Variables have been retrieved')
+}
+
+
+   var myScore = 5081
+   var myLives = 3
+   var myLevel = 1
+
+   function refresh(){
+      document.getElementById('myDiv1').value = 'Score: ' + myScore + ' Lives: ' + myLives + ' Level: ' + myLevel
+   }
+   document.getElementById('myDiv1').value = 'Score: ' + myScore + ' Lives: ' + myLives + ' Level: ' + myLevel
+
+</script>
+
+<input type="button" value="Store Variables" onClick="storeV()">
+
+<input type="button" value="Retrieve Variables" onClick="retrieveV()">
+
+<input type="button" value="Clear Variables" onClick="clearV()"><br><br>
+
+
+
+<input id="myDiv1" type=text size=70 value="" placeholder="Write here to store"><br>
 
 
