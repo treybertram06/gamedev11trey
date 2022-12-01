@@ -1,4 +1,18 @@
-
+<style>
+      
+   body {
+      background-color: #6765C2;
+      color: black;
+      font-family: serif;
+      outline-style: solid;
+      outline-color: #262476;
+      outline-width: thick;
+      padding: 10px;
+      text-align: center;
+      
+       }
+      
+  </style>
 
 
 
@@ -11,16 +25,31 @@
   new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,fr,de,ru', layout:google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
 
     }
+
+
+    function changeDiv() {
+      document.getElementById('toBeTranslated').innerHTML = myText01.value ;
+    }
+
+
 </script>
 
 
 
-<h1 align=center>t2a10-translate-name</h1>
+<h1 align=center>T2A10 Translate Name</h1><br><br><br>
 
-<div id="google_translate_element">I really like javascript</div>
+<body>
+<input type="text" id="myText01" value="" placeholder="Type what you want translated" width="200px" height="20px"><br><br>
+
+<div id="toBeTranslated">This is the text to be translated</div>
+<div id="google_translate_element"></div><br><br>
+
+<button onclick="changeDiv()">Refresh</button>
 
 
 <input  type="button" value="initilize speak" onclick="{  
    let myVoice = 'Russian Female'
    responsiveVoice.speak(document.getElementById('google_translate_element').innerText, myVoice, {pitch: 1, rate: 1, volume : 1})                                              
 }"><br><br>
+
+</body>
