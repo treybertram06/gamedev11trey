@@ -1,11 +1,81 @@
-<script> let mySound1 = new Audio('Yeh.m4a') </script>
+<script>
+   let mySound1 = new Audio('sounds/Yeh.m4a')
+   let mySound2 = new Audio('sounds/sus.mp3')
+   let mySound3 = new Audio('sounds/Andriod.mp3')
+   let mySound4 = new Audio('sounds/Taco.mp3')
+   let mySound5 = new Audio('sounds/windowsError.mp3')
+   let mySound6 = new Audio('sounds/Yees.mp3')
+   let mySound7 = new Audio('sounds/CRstart.mp3')
+   let mySound8 = new Audio('sounds/alert.mp3')
+   let mySound9 = new Audio('sounds/flash.mp3')
+
+
+    function playSound1() {
+        mySound1.play()
+    }
+    function playSound2() {
+        mySound2.play()
+    }
+    function playSound3() {
+        mySound3.play()
+    }
+    function playSound4() {
+        mySound4.play()
+    }
+    function playSound5() {
+        mySound5.play()
+    }
+    function playSound6() {
+        mySound6.play()
+    }
+    function playSound7() {
+        mySound7.play()
+    }
+    function playSound8() {
+        mySound8.play()
+    }
+    function playSound9() {
+        mySound9.play()
+    }
+
+</script>
  
+ <style>
+      
+      body {
+         background-color: #6765C2;
+         color: black;
+         font-family: serif;
+         outline-style: solid;
+         outline-color: #262476;
+         outline-width: thick;
+         padding: 10px;
+         text-align: center;
+         
+          }
+         
+     </style>
 
 
-<h1 align=center>T3A12-Sounds-and-events-name.html</h1>
+<body>
+  <h1> T2A10-B Sounds and Events Trey.html </h1><br><br>
 
+  <button onclick="playSound1()">Yeh</button>
+   
+  <button onclick="playSound2()">Sus</button>
 
-<input type=button value=sound onClick="{
-    mySound1.play()
+  <button onclick="playSound3()">Android Notification</button>
 
-}">
+  <button onclick="playSound4()">Taco Bell</button>
+
+  <button onclick="playSound5()">Windows</button>
+
+  <button onclick="playSound6()">Yeees?</button>
+
+  <button onclick="playSound7()">Clash Royale</button>
+
+  <button onclick="playSound8()">EAS Alarm</button>
+
+  <button onclick="playSound9()">Flashbang</button>
+
+</body>
