@@ -32,6 +32,8 @@
             color: "blue"
         };
 
+        var level3 = false;
+
         var enemies = [];
 
         var bullets = [];
@@ -96,21 +98,32 @@
             ctx.fillText("Game Over", 10, 30);
         }
 
+        function drawlevel3() {
+            ctx.fillStyle = "black";
+            ctx.font = "30px Arial";
+            ctx.fillText("Level 3", 10, 30);
+            window.location.href = "gameLevel3.html";
+        }
+
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            if (!gameOver) {
+            if (!gameOver && !level3) {
                 drawPlayer();
                 drawEnemies();
                 drawBullets();
                 drawScore();
             } else {
-                drawGameOver();
+                if (gameOver) {
+                    drawGameOver();
+                } else {
+                    drawlevel3();
+                }
             }
         }
 
         function update() {
-            if (!gameOver) {
+            if (!gameOver && !level3) {
                 updatePlayer();
                 updateEnemies();
                 updateBullets();
@@ -231,6 +244,9 @@
                     enemies[i].y < player.y + player.height &&
                     enemies[i].y + enemies[i].height > player.y) {
                     gameOver = true;
+                }
+                if (score > 3000) {
+                    level3 = true;
                 }
             }
         }
