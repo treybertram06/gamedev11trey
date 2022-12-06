@@ -187,7 +187,7 @@
             score++;
         }
 
-        function spawnEnemy() {
+  function spawnEnemy() {
             var enemy = {
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
@@ -198,8 +198,15 @@
                 ySpeed: Math.random() * enemySpeed - enemySpeed / 2
             };
 
-            enemies.push(enemy);
+            if (enemy.x < (player.x + 300) && enemy.x > (player.x - 300) && enemy.y < (player.y + 300) && enemy.y > (player.y - 300)) {
+                spawnEnemy();
+            } else {
+                enemies.push(enemy);
+            }
+
+      
         }
+
 
         function spawnBullet() {
             var bullet = {
