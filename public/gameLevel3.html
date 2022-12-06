@@ -189,13 +189,14 @@
                 ySpeed: Math.random() * enemySpeed - enemySpeed / 2
             };
 
-            if (enemy.x < (player.x + 100) && enemy.x > (player.x - 100) && enemy.y < (player.y + 100) && enemy.y > (player.y - 100)) {
+            if (enemy.x < (player.x + 300) && enemy.x > (player.x - 300) && enemy.y < (player.y + 300) && enemy.y > (player.y - 300)) {
                 spawnEnemy();
             } else {
                 enemies.push(enemy);
+                enemies.push(enemy);
             }
 
-            enemies.push(enemy);
+      
         }
 
         function spawnBullet() {
