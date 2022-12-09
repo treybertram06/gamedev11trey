@@ -1,0 +1,127 @@
+
+<html>
+    <head>
+        <title>Car Game</title>
+        <style>
+            #canvas {
+                border: 1px solid black;
+            }
+        </style>
+        <canvas id="canvas" width="1" height="1"></canvas>
+
+    <script>
+
+        function gameStart() {
+            init();
+
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+
+        var x = (canvas.width/2);
+        var y = (canvas.height/2);
+        var width = 50;
+        var height = 50;
+        var rotation = 0;
+        var speed = 0;
+        var acceleration = 1;
+        var friction = 0.9;
+       
+
+        //make a line of code loop every millisecond
+        var turnSpeed = 0.1;
+        
+        
+        var keys = [];
+
+        document.addEventListener("keydown", function(e) {
+            keys[e.keyCode] = true;
+        });
+
+        document.addEventListener("keyup", function(e) {
+            keys[e.keyCode] = false;
+        });
+
+        function update() {
+            if (keys[87]) {
+                speed += acceleration;
+            }
+            if (keys[83]) {
+                speed -= acceleration;
+            }
+            if (keys[65] && (speed > 1 || speed < (-1))) {
+                rotation -= turnSpeed;
+            }
+            if (keys[68] && (speed > 1 || speed < (-1))) {
+                rotation += turnSpeed;
+            }
+
+            speed *= friction;
+//make the car turn more like a front wheel steering car
+          
+
+            x += Math.cos(rotation) * speed;
+            y += Math.sin(rotation) * speed;
+
+            if (x > canvas.width) {
+                x = 0;
+            }
+            if (x < 0) {
+                x = canvas.width;
+            }
+            if (y > canvas.height) {
+                y = 0;
+            }
+            if (y < 0) {
+                y = canvas.height;
+            }
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(rotation);
+            ctx.fillRect(-width / 2, -height / 2, width, height);
+            ctx.restore();
+
+            requestAnimationFrame(update);
+        }
+
+        var road = {
+            x: 250,
+            y: 250,
+            width: 100,
+            height: 100,
+            rotation: 0
+        }
+
+        function drawRoad() {
+            ctx.save();
+            ctx.translate(road.x, road.y);
+            ctx.rotate(road.rotation);
+            ctx.fillRect(-road.width / 2, -road.height / 2, road.width, road.height);
+            ctx.restore();
+        }
+
+        function draw() {
+            drawRoad();
+            requestAnimationFrame(draw);
+        }
+
+        draw();
+
+        update();
+
+        function init() {
+            canvas = document.getElementById("canvas");
+            ctx = canvas.getContext("2d");
+
+            canvas.width = (window.innerWidth - 35);
+            canvas.height = (window.innerHeight - 35);
+
+        }
+    }
+
+
+    </script>
+        <button onclick="gameStart()">Start</button>
+
+       
