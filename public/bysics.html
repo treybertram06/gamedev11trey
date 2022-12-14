@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Physics Engine for JavaScript - Matter.js - CodeBrainer</title>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.17.1/matter.min.js"></script>
+ <script src="matter.js"></script>
+ <style>
+ canvas {
+ position: relative;
+ border: 1px solid black;
+ background-color: white;
+ }
+ </style>
+</head>
+<body onload="init()">
+ <div id="areaToRender">
+ </div>
+ <div>
+
+ </div>
+
+
+<script>
+let height = window.innerHeight - 35;
+let width = window.innerWidth - 35;
+
+let Engine = Matter.Engine,
+ Render = Matter.Render,
+ Runner = Matter.Runner,
+ Bodies = Matter.Bodies,
+ Composite = Matter.Composite,
+ Composites = Matter.Composites,
+ Constraint = Matter.Constraint,
+ Mouse = Matter.Mouse,
+ MouseConstraint = Matter.MouseConstraint,
+ Events = Matter.Events;
+ let engine;
+let render;
+let runner;
+
+function init() {
+
+ // create an engine
+ engine = Engine.create();
+
+ // create a renderer
+ render = Render.create({
+ element: document.getElementById("areaToRender"),
+ engine: engine,
+ options: {
+ width: (window.innerWidth - 35),
+ height: (window.innerHeight - 35),
+ pixelRatio: 1,
+ background: '#fafafa',
+ wireframes: false // <-- important
+ }
+ });
+
+ 
+ // run the renderer
+ Render.run(render);
+
+ // create runner
+ runner = Runner.create();
+
+ // run the engine
+ Runner.run(runner, engine);
+}
+
+let lastClear = "(not given)"
+function clearWorld(exampleName) {
+ if (lastClear != exampleName) {
+ lastClear = exampleName
+
+ Matter.Composite.clear(engine.world, false)
+ }
+}
+
+
+
+ function StartBoxes() {
+    clearWorld("Boxes")
+    // create two boxes and a ground
+    let boxA = Bodies.rectangle(400, 200, 80, 80);
+    let boxB = Bodies.rectangle(450, 50, 80, 80, {
+    render: {
+    fillStyle: 'red',
+    strokeStyle: 'blue',
+    lineWidth: 3
+    }
+    });
+    let ground = Bodies.rectangle(400, 610, 810, 60, { isStatic: true });
+   
+    // add all of the bodies to the world
+    Composite.add(engine.world, [boxA, boxB, ground]);
+   
+    Engine.update(engine);
+   }
+
+   function StartBalloon() {
+ clearWorld("Balloon")
+ // engine.gravity = -0.6
+ engine.world.density = 1
+
+ // create two boxes and a ground
+ let balloon1 = Bodies.circle(450, 450, 80, {
+ mass: 0.001,
+ render: {
+ fillStyle: 'red',
+ strokeStyle: 'blue',
+ lineWidth: 3,
+ }
+ });
+ let ground = Bodies.rectangle(400, 610, 810, 60, { isStatic: true });
+
+
+ // add all of the bodies to the world
+ Composite.add(engine.world, [balloon1, ground]);
+
+ setInterval(() => {
+ Matter.Body.applyForce(balloon1, balloon1.position, { x: 0, y: -balloon1.mass / 100 })
+ }, 100)
+
+ Engine.update(engine);
+}
+
+
+let ropes = [];
+function StartBalloonWithString() {
+ clearWorld("BalloonWitString")
+ engine.world.density = 1
+
+ // create two boxes and a ground
+ let balloon1 = Bodies.circle(500, 500, 80, {
+ mass: 0.001,
+ render: {
+ fillStyle: 'red',
+ strokeStyle: 'blue',
+ lineWidth: 3,
+ }
+ });
+ let ground = Bodies.rectangle(400, 610, 810, 60, { isStatic: true });
+
+
+ // add all of the bodies to the world
+ Composite.add(engine.world, [balloon1, ground]);
+
+  //add a string
+  let rope = Constraint.create({
+ pointA: { x: 200, y: 550 },
+ bodyB: balloon1,
+ render: { strokeStyle: 'gray', lineWidth: 2, }
+ })
+ Composite.add(engine.world, rope);
+ ropes.push(rope)
+
+
+ setInterval(() => {
+ Matter.Body.applyForce(balloon1, balloon1.position, { x: 0, y: -balloon1.mass / 100 })
+ }, 100)
+
+
+ Engine.update(engine);
+}
+function CutTheRope() {
+ let rope = ropes[0]
+ Composite.remove(engine.world, rope)
+ ropes.shift()
+}
+;
+function StartSlingshot() {
+ clearWorld("Slingshot")
+
+ // add bodies
+ let ground = Bodies.rectangle(395, 600, 815, 50, { isStatic: true });
+ let rockOptions = { density: 0.004 };
+ let rock = Bodies.polygon(170, 450, 8, 20, rockOptions);
+ let anchor = { x: 170, y: 450 };
+ let elastic = Constraint.create({
+ pointA: anchor,
+ bodyB: rock,
+ stiffness: 0.05,
+ render: { strokeStyle: 'gray', lineWidth: 2 }
+ });
+ let ground2 = Bodies.rectangle(610, 500, 200, 20, { isStatic: true });
+
+ let pyramid = Composites.pyramid(550, 350, 5, 10, 0, 0, function (x, y) {
+ return Bodies.rectangle(x, y, 25, 40);
+ });
+ // add mouse control
+ let mouse = Mouse.create(render.canvas),
+ mouseConstraint = MouseConstraint.create(engine, {
+ mouse: mouse,
+ constraint: {
+ stiffness: 0.2,
+ render: {
+ visible: false
+ }
+ }
+ });
+ Events.on(engine, 'afterUpdate', function () {
+ if (mouseConstraint.mouse.button === -1 && (rock.position.x > 190 || rock.position.y < 430)) {
+ rock = Bodies.polygon(170, 450, 7, 20, rockOptions);
+ Composite.add(engine.world, rock);
+ elastic.bodyB = rock;
+ }
+ });
+ Composite.add(engine.world, [ground, ground2, pyramid, rock, elastic]);
+ Composite.add(engine.world, mouseConstraint);
+
+ // keep the mouse in sync with rendering
+ render.mouse = mouse;
+}
+
+function funnyShapes() {
+
+    clearWorld("funnyShapes")
+
+ 
+    // add bodies
+    var stack = Composites.stack(20, 20, 10, 5, 0, 0, function(x, y) {
+        var sides = Math.round(Common.random(1, 8));
+
+        // round the edges of some bodies
+        var chamfer = null;
+        if (sides > 2 && Common.random() > 0.7) {
+            chamfer = {
+                radius: 10
+            };
+        }
+
+        switch (Math.round(Common.random(0, 1))) {
+        case 0:
+            if (Common.random() < 0.8) {
+                return Bodies.rectangle(x, y, Common.random(25, 50), Common.random(25, 50), { chamfer: chamfer });
+            } else {
+                return Bodies.rectangle(x, y, Common.random(80, 120), Common.random(25, 30), { chamfer: chamfer });
+            }
+        case 1:
+            return Bodies.polygon(x, y, sides, Common.random(25, 50), { chamfer: chamfer });
+        }
+    });
+
+    Composite.add(world, stack);
+
+    Composite.add(world, [
+        // walls
+        Bodies.rectangle(400, 0, 800, 50, { isStatic: true }),
+        Bodies.rectangle(400, 600, 800, 50, { isStatic: true }),
+        Bodies.rectangle(800, 300, 50, 600, { isStatic: true }),
+        Bodies.rectangle(0, 300, 50, 600, { isStatic: true })
+    ]);
+
+    // add mouse control
+    var mouse = Mouse.create(render.canvas),
+        mouseConstraint = MouseConstraint.create(engine, {
+            mouse: mouse,
+            constraint: {
+                stiffness: 0.2,
+                render: {
+                    visible: false
+                }
+            }
+        });
+
+    Composite.add(world, mouseConstraint);
+
+    // keep the mouse in sync with rendering
+    render.mouse = mouse;
+
+    // fit the render viewport to the scene
+    Render.lookAt(render, {
+        min: { x: 0, y: 0 },
+        max: { x: 800, y: 600 }
+    });
+
+    // context for MatterTools.Demo
+    return {
+        engine: engine,
+        runner: runner,
+        render: render,
+        canvas: render.canvas,
+        stop: function() {
+            Matter.Render.stop(render);
+            Matter.Runner.stop(runner);
+        }
+    };
+};
+
+Example.mixed.title = 'Mixed Shapes';
+Example.mixed.for = '>=0.14.2';
+
+if (typeof module !== 'undefined') {
+    module.exports = Example.mixed;
+}
+
+
+   
+</script>
+
+   <button onclick="StartBoxes()">Start Boxes</button>
+   <button onclick="StartBalloon()">Start Balloon</button>
+    <button onclick="StartBalloonWithString()">Start Balloon With String</button>
+    <button onclick="CutTheRope()">Cut The Rope</button>
+    <button onclick="StartSlingshot()">Start Slingshot</button>
+    <button onclick="funnyShapes()">funnyShapes</button>
