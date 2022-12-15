@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Physics Engine for JavaScript - Matter.js - CodeBrainer</title>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.17.1/matter.min.js"></script>
+ <script src="matter.js"></script>
+ <style>
+ canvas {
+ position: relative;
+ border: 1px solid black;
+ background-color: white;
+ }
+ </style>
+</head>
+<body onload="init()">
+ <div id="areaToRender">
+ </div>
+ <div>
+
+ </div>
+
+
+<script>
+let height = window.innerHeight - 35;
+let width = window.innerWidth - 35;
+
+let Engine = Matter.Engine,
+ Render = Matter.Render,
+ Runner = Matter.Runner,
+ Bodies = Matter.Bodies,
+ Composite = Matter.Composite,
+ Composites = Matter.Composites,
+ Constraint = Matter.Constraint,
+ Mouse = Matter.Mouse,
+ MouseConstraint = Matter.MouseConstraint,
+ Events = Matter.Events;
+ let engine;
+let render;
+let runner;
+
+function init() {
+
+ // create an engine
+ engine = Engine.create();
+
+ // create a renderer
+ render = Render.create({
+ element: document.getElementById("areaToRender"),
+ engine: engine,
+ options: {
+ width: (window.innerWidth - 35),
+ height: (window.innerHeight - 35),
+ pixelRatio: 1,
+ background: '#fafafa',
+ wireframes: false // <-- important
+ }
+ });
+
+ 
+ // run the renderer
+ Render.run(render);
+
+ // create runner
+ runner = Runner.create();
+
+ // run the engine
+ Runner.run(runner, engine);
+}
+
+let lastClear = "(not given)"
+function clearWorld(exampleName) {
+ if (lastClear != exampleName) {
+ lastClear = exampleName
+
+ Matter.Composite.clear(engine.world, false)
+ }
+}
+
+
+
+ function StartBoxes() {
+    clearWorld("Boxes")
+    // create two boxes and a ground
+    let boxA = Bodies.rectangle(400, 200, 80, 80);
+    let boxB = Bodies.rectangle(450, 50, 80, 80, {
+    render: {
+    fillStyle: 'red',
+    strokeStyle: 'blue',
+    lineWidth: 3
+    }
+    });
+    let ground = Bodies.rectangle(400, 610, 810, 60, { isStatic: true });
+   
+    // add all of the bodies to the world
+    Composite.add(engine.world, [boxA, boxB, ground]);
+   
+    Engine.update(engine);
+   }
+
+   function StartBalloon() {
+ clearWorld("Balloon")
+ // engine.gravity = -0.6
+ engine.world.density = 1
+
+ // create two boxes and a ground
+ let balloon1 = Bodies.circle(450, 450, 80, {
+ mass: 0.001,
+ render: {
+ fillStyle: 'red',
+ strokeStyle: 'blue',
+ lineWidth: 3,
+ }
+ });
+ let ground = Bodies.rectangle(400, 610, 810, 60, { isStatic: true });
+
+
+ // add all of the bodies to the world
+ Composite.add(engine.world, [balloon1, ground]);
+
+ setInterval(() => {
+ Matter.Body.applyForce(balloon1, balloon1.position, { x: 0, y: -balloon1.mass / 100 })
+ }, 100)
+
+ Engine.update(engine);
+}
+
+
+let ropes = [];
+function StartBalloonWithString() {
+ clearWorld("BalloonWitString")
+ engine.world.density = 1
+
+ // create two boxes and a ground
+ let balloon1 = Bodies.circle(500, 500, 80, {
+ mass: 0.001,
+ render: {
+ fillStyle: 'red',
+ strokeStyle: 'blue',
+ lineWidth: 3,
+ }
+ });
+ let ground = Bodies.rectangle(400, 610, 810, 60, { isStatic: true });
+
+
+ // add all of the bodies to the world
+ Composite.add(engine.world, [balloon1, ground]);
+
+  //add a string
+  let rope = Constraint.create({
+ pointA: { x: 200, y: 550 },
+ bodyB: balloon1,
+ render: { strokeStyle: 'gray', lineWidth: 2, }
+ })
+ Composite.add(engine.world, rope);
+ ropes.push(rope)
+
+
+ setInterval(() => {
+ Matter.Body.applyForce(balloon1, balloon1.position, { x: 0, y: -balloon1.mass / 100 })
+ }, 100)
+
+
+ Engine.update(engine);
+}
+function CutTheRope() {
+ let rope = ropes[0]
+ Composite.remove(engine.world, rope)
+ ropes.shift()
+}
+;
+function StartSlingshot() {
+ clearWorld("Slingshot")
+
+ // add bodies
+ let ground = Bodies.rectangle(395, 600, 815, 50, { isStatic: true });
+ let rockOptions = { density: 0.004 };
+ let rock = Bodies.polygon(170, 450, 8, 20, rockOptions);
+ let anchor = { x: 170, y: 450 };
+ let elastic = Constraint.create({
+ pointA: anchor,
+ bodyB: rock,
+ stiffness: 0.05,
+ render: { strokeStyle: 'gray', lineWidth: 2 }
+ });
+ let ground2 = Bodies.rectangle(610, 500, 200, 20, { isStatic: true });
+
+ let pyramid = Composites.pyramid(550, 350, 5, 10, 0, 0, function (x, y) {
+ return Bodies.rectangle(x, y, 25, 40);
+ });
+
+
+ // add mouse control
+ let mouse = Mouse.create(render.canvas),
+ mouseConstraint = MouseConstraint.create(engine, {
+ mouse: mouse,
+ constraint: {
+ stiffness: 0.2,
+ render: {
+ visible: false
+ }
+ }
+ });
+ Events.on(engine, 'afterUpdate', function () {
+ if (mouseConstraint.mouse.button === -1 && (rock.position.x > 190 || rock.position.y < 430)) {
+ rock = Bodies.polygon(170, 450, 7, 20, rockOptions);
+ Composite.add(engine.world, rock);
+ elastic.bodyB = rock;
+ }
+ });
+ Composite.add(engine.world, [ground, ground2, pyramid, rock, elastic]);
+ Composite.add(engine.world, mouseConstraint);
+
+ // keep the mouse in sync with rendering
+ render.mouse = mouse;
+}
+
+function StartSlingshot2() {
+ clearWorld("Slingshot2")
+
+ // add bodies
+ var ground = Bodies.rectangle(395, 600, 815, 50, { isStatic: true, render: { fillStyle: '#060a19' } }),
+        rockOptions = { density: 0.004 },
+        rock = Bodies.polygon(170, 450, 8, 20, rockOptions),
+        anchor = { x: 170, y: 450 },
+        elastic = Constraint.create({ 
+            pointA: anchor, 
+            bodyB: rock, 
+            stiffness: 0.05,
+            render: { strokeStyle: 'gray', lineWidth: 2 }
+        });
+
+    var pyramid = Composites.pyramid(500, 300, 9, 10, 0, 0, function(x, y) {
+        return Bodies.rectangle(x, y, 25, 40);
+    });
+
+    var ground2 = Bodies.rectangle(610, 250, 200, 20, { isStatic: true, render: { fillStyle: '#060a19' } });
+
+    var pyramid2 = Composites.pyramid(550, 0, 5, 10, 0, 0, function(x, y) {
+        return Bodies.rectangle(x, y, 25, 40);
+    });
+
+    Composite.add(engine.world, [ground, pyramid, ground2, pyramid2, rock, elastic]);
+    Events.on(engine, 'afterUpdate', function() {
+        if (mouseConstraint.mouse.button === -1 && (rock.position.x > 190 || rock.position.y < 430)) {
+            rock = Bodies.polygon(170, 450, 7, 20, rockOptions);
+            Composite.add(engine.world, rock);
+            elastic.bodyB = rock;
+        }
+    });
+
+
+  // add mouse control
+    var mouse = Mouse.create(render.canvas),
+        mouseConstraint = MouseConstraint.create(engine, {
+            mouse: mouse,
+            constraint: {
+                stiffness: 0.2,
+                render: {
+                    visible: false
+                }
+            }
+        });
+ 
+
+    Composite.add(engine.world, mouseConstraint);
+
+    // keep the mouse in sync with rendering
+    render.mouse = mouse;
+
+    // fit the render viewport to the scene
+    Render.lookAt(render, {
+        min: { x: 0, y: 0 },
+        max: { x: 800, y: 600 }
+    });
+  }
+
+  
+function constraints() {
+ clearWorld("constraints")
+
+// add stiff global constraint
+var body = Bodies.polygon(150, 200, 5, 30);
+
+var constraint = Constraint.create({
+    pointA: { x: 150, y: 100 },
+    bodyB: body,
+    pointB: { x: -10, y: -10 },
+    render: { strokeStyle: 'gray', lineWidth: 2 }
+});
+
+Composite.add(engine.world, [body, constraint]);
+
+// add soft global constraint
+var body = Bodies.polygon(280, 100, 3, 30);
+
+var constraint = Constraint.create({
+    pointA: { x: 280, y: 120 },
+    bodyB: body,
+    pointB: { x: -10, y: -7 },
+    stiffness: 0.001,
+    render: { strokeStyle: 'gray', lineWidth: 2 }
+});
+
+Composite.add(engine.world, [body, constraint]);
+
+// add damped soft global constraint
+var body = Bodies.polygon(400, 100, 4, 30);
+
+var constraint = Constraint.create({
+    pointA: { x: 400, y: 120 },
+    bodyB: body,
+    pointB: { x: -10, y: -10 },
+    stiffness: 0.001,
+    damping: 0.05,
+    render: { strokeStyle: 'gray', lineWidth: 2 }
+});
+
+Composite.add(engine.world, [body, constraint]);
+
+// add revolute constraint
+var body = Bodies.rectangle(600, 200, 200, 20);
+var ball = Bodies.circle(550, 150, 20);
+
+var constraint = Constraint.create({
+    pointA: { x: 600, y: 200 },
+    bodyB: body,
+    length: 0,
+    render: { strokeStyle: 'gray', lineWidth: 2 }
+});
+
+Composite.add(engine.world, [body, ball, constraint]);
+
+// add revolute multi-body constraint
+var body = Bodies.rectangle(500, 400, 100, 20, { collisionFilter: { group: -1 } });
+var ball = Bodies.circle(600, 400, 20, { collisionFilter: { group: -1 } });
+
+var constraint = Constraint.create({
+    bodyA: body,
+    bodyB: ball
+});
+
+Composite.add(engine.world, [body, ball, constraint]);
+
+// add stiff multi-body constraint
+var bodyA = Bodies.polygon(100, 400, 6, 20);
+var bodyB = Bodies.polygon(200, 400, 1, 50);
+
+var constraint = Constraint.create({
+    bodyA: bodyA,
+    pointA: { x: -10, y: -10 },
+    bodyB: bodyB,
+    pointB: { x: -10, y: -10 },
+    render: { strokeStyle: 'gray', lineWidth: 2 }
+});
+
+Composite.add(engine.world, [bodyA, bodyB, constraint]);
+
+// add soft global constraint
+var bodyA = Bodies.polygon(300, 400, 4, 20);
+var bodyB = Bodies.polygon(400, 400, 3, 30);
+
+var constraint = Constraint.create({
+    bodyA: bodyA,
+    pointA: { x: -10, y: -10 },
+    bodyB: bodyB,
+    pointB: { x: -10, y: -7 },
+    stiffness: 0.001,
+    render: { strokeStyle: 'gray', lineWidth: 2 }
+});
+
+Composite.add(engine.world, [bodyA, bodyB, constraint]);
+
+// add damped soft global constraint
+var bodyA = Bodies.polygon(500, 400, 6, 30);
+var bodyB = Bodies.polygon(600, 400, 7, 60);
+
+var constraint = Constraint.create({
+    bodyA: bodyA,
+    pointA: { x: -10, y: -10 },
+    bodyB: bodyB,
+    pointB: { x: -10, y: -10 },
+    stiffness: 0.001,
+    damping: 0.1,
+    render: { strokeStyle: 'gray', lineWidth: 2 }
+});
+
+Composite.add(engine.world, [bodyA, bodyB, constraint]);
+
+Composite.add(engine.world, [
+    // walls
+    Bodies.rectangle(400, 0, 800, 50, { isStatic: true }),
+    Bodies.rectangle(400, 600, 800, 50, { isStatic: true }),
+    Bodies.rectangle(800, 300, 50, 600, { isStatic: true }),
+    Bodies.rectangle(0, 300, 50, 600, { isStatic: true })
+]);
+
+// add mouse control
+var mouse = Mouse.create(render.canvas),
+    mouseConstraint = MouseConstraint.create(engine, {
+        mouse: mouse,
+        constraint: {
+            // allow bodies on mouse to rotate
+            angularStiffness: 0,
+            render: {
+                visible: false
+            }
+        }
+    });
+
+Composite.add(engine.world, mouseConstraint);
+
+// keep the mouse in sync with rendering
+render.mouse = mouse;
+
+// fit the render viewport to the scene
+Render.lookAt(render, {
+    min: { x: 0, y: 0 },
+    max: { x: 800, y: 600 }
+});
+}
+
+function friction() {
+  clearWorld("friction")
+
+
+
+  // add bodies
+  Composite.add(engine.world, [
+        // walls
+        Bodies.rectangle(400, 0, 800, 50, { isStatic: true }),
+        Bodies.rectangle(400, 600, 800, 50, { isStatic: true }),
+        Bodies.rectangle(800, 300, 50, 600, { isStatic: true }),
+        Bodies.rectangle(0, 300, 50, 600, { isStatic: true })
+    ]);
+
+    Composite.add(engine.world, [
+        Bodies.rectangle(300, 180, 700, 20, { isStatic: true, angle: Math.PI * 0.06, render: { fillStyle: '#060a19' } }),
+        Bodies.rectangle(300, 70, 40, 40, { friction: 0.001 })
+    ]);
+
+    Composite.add(engine.world, [
+        Bodies.rectangle(300, 350, 700, 20, { isStatic: true, angle: Math.PI * 0.06, render: { fillStyle: '#060a19' } }),
+        Bodies.rectangle(300, 250, 40, 40, { friction: 0.0005 })
+    ]);
+
+    Composite.add(engine.world, [
+        Bodies.rectangle(300, 520, 700, 20, { isStatic: true, angle: Math.PI * 0.06, render: { fillStyle: '#060a19' } }),
+        Bodies.rectangle(300, 430, 40, 40, { friction: 0 })
+    ]);
+
+    // add mouse control
+    var mouse = Mouse.create(render.canvas),
+        mouseConstraint = MouseConstraint.create(engine, {
+            mouse: mouse,
+            constraint: {
+                stiffness: 0.2,
+                render: {
+                    visible: false
+                }
+            }
+        });
+
+    Composite.add(engine.world, mouseConstraint);
+
+    // keep the mouse in sync with rendering
+    render.mouse = mouse;
+
+    // fit the render viewport to the scene
+    Render.lookAt(render, {
+        min: { x: 0, y: 0 },
+        max: { x: 800, y: 600 }
+    });
+
+}
+
+
+function manipulation() {
+  var Engine = Matter.Engine,
+        Render = Matter.Render,
+        Runner = Matter.Runner,
+        Body = Matter.Body,
+        Events = Matter.Events,
+        MouseConstraint = Matter.MouseConstraint,
+        Mouse = Matter.Mouse,
+        Composite = Matter.Composite,
+        Bodies = Matter.Bodies;
+
+// add bodies
+var bodyA = Bodies.rectangle(100, 200, 50, 50, { isStatic: true, render: { fillStyle: '#060a19' } }),
+        bodyB = Bodies.rectangle(200, 200, 50, 50),
+        bodyC = Bodies.rectangle(300, 200, 50, 50),
+        bodyD = Bodies.rectangle(400, 200, 50, 50),
+        bodyE = Bodies.rectangle(550, 200, 50, 50),
+        bodyF = Bodies.rectangle(700, 200, 50, 50),
+        bodyG = Bodies.circle(400, 100, 25, { render: { fillStyle: '#060a19' } }),
+        partA = Bodies.rectangle(600, 200, 120, 50, { render: { fillStyle: '#060a19' } }),
+        partB = Bodies.rectangle(660, 200, 50, 190, { render: { fillStyle: '#060a19' } }),
+        compound = Body.create({
+            parts: [partA, partB],
+            isStatic: true
+        });
+
+    Composite.add(engine.world, [bodyA, bodyB, bodyC, bodyD, bodyE, bodyF, bodyG, compound]);
+
+    Composite.add(engine.world, [
+        // walls
+        Bodies.rectangle(400, 0, 800, 50, { isStatic: true }),
+        Bodies.rectangle(400, 600, 800, 50, { isStatic: true }),
+        Bodies.rectangle(800, 300, 50, 600, { isStatic: true }),
+        Bodies.rectangle(0, 300, 50, 600, { isStatic: true })
+    ]);
+
+    var counter = 0,
+        scaleFactor = 1.01;
+
+    Events.on(runner, 'afterTick', function(event) {
+        counter += 1;
+
+        if (counter === 40)
+            Body.setStatic(bodyG, true);
+
+        if (scaleFactor > 1) {
+            Body.scale(bodyF, scaleFactor, scaleFactor);
+            Body.scale(compound, 0.995, 0.995);
+
+            // modify bodyE vertices
+            bodyE.vertices[0].x -= 0.2;
+            bodyE.vertices[0].y -= 0.2;
+            bodyE.vertices[1].x += 0.2;
+            bodyE.vertices[1].y -= 0.2;
+            Body.setVertices(bodyE, bodyE.vertices);
+        }
+
+        // make bodyA move up and down
+        // body is static so must manually update velocity for friction to work
+        var py = 300 + 100 * Math.sin(engine.timing.timestamp * 0.002);
+        Body.setVelocity(bodyA, { x: 0, y: py - bodyA.position.y });
+        Body.setPosition(bodyA, { x: 100, y: py });
+
+        // make compound body move up and down and rotate constantly
+        Body.setVelocity(compound, { x: 0, y: py - compound.position.y });
+        Body.setAngularVelocity(compound, 0.02);
+        Body.setPosition(compound, { x: 600, y: py });
+        Body.rotate(compound, 0.02);
+
+        // every 1.5 sec
+        if (counter >= 60 * 1.5) {
+            Body.setVelocity(bodyB, { x: 0, y: -10 });
+            Body.setAngle(bodyC, -Math.PI * 0.26);
+            Body.setAngularVelocity(bodyD, 0.2);
+
+            // reset counter
+            counter = 0;
+            scaleFactor = 1;
+        }
+    });
+
+    // add mouse control
+    var mouse = Mouse.create(render.canvas),
+        mouseConstraint = MouseConstraint.create(engine, {
+            mouse: mouse,
+            constraint: {
+                stiffness: 0.2,
+                render: {
+                    visible: false
+                }
+            }
+        });
+
+    Composite.add(engine.world, mouseConstraint);
+
+    // keep the mouse in sync with rendering
+    render.mouse = mouse;
+
+    // fit the render viewport to the scene
+    Render.lookAt(render, {
+        min: { x: 0, y: 0 },
+        max: { x: 800, y: 600 }
+    });
+
+}
+
+
+
+
+
+
+
+
+
+function car() {
+
+  var Example = Example || {};
+
+  Example.car = function() {
+    var Engine = Matter.Engine,
+        Render = Matter.Render,
+        Runner = Matter.Runner,
+        Composites = Matter.Composites,
+        MouseConstraint = Matter.MouseConstraint,
+        Mouse = Matter.Mouse,
+        Composite = Matter.Composite,
+        Bodies = Matter.Bodies;
+        car =  Matter.Bodies;
+  }
+
+
+ 
+
+    // add bodies
+    Composite.add(engine.world, [
+        // walls
+        Bodies.rectangle(400, 0, 800, 50, { isStatic: true }),
+        Bodies.rectangle(400, 600, 800, 50, { isStatic: true }),
+        Bodies.rectangle(800, 300, 50, 600, { isStatic: true }),
+        Bodies.rectangle(0, 300, 50, 600, { isStatic: true })
+    ]);
+
+    // see car function defined later in this file
+    var scale = 0.9;
+    Composite.add(engine.world, Example.car.car(150, 100, 150 * scale, 30 * scale, 30 * scale));
+    
+    scale = 0.8;
+    Composite.add(engine.world, Example.car.car(350, 300, 150 * scale, 30 * scale, 30 * scale));
+    
+    Composite.add(engine.world, [
+        Bodies.rectangle(200, 150, 400, 20, { isStatic: true, angle: Math.PI * 0.06, render: { fillStyle: '#060a19' }}),
+        Bodies.rectangle(500, 350, 650, 20, { isStatic: true, angle: -Math.PI * 0.06, render: { fillStyle: '#060a19' }}),
+        Bodies.rectangle(300, 560, 600, 20, { isStatic: true, angle: Math.PI * 0.04, render: { fillStyle: '#060a19' }})
+    ]);
+
+    // add mouse control
+    var mouse = Mouse.create(render.canvas),
+        mouseConstraint = MouseConstraint.create(engine, {
+            mouse: mouse,
+            constraint: {
+                stiffness: 0.2,
+                render: {
+                    visible: false
+                }
+            }
+        });
+
+    Composite.add(engine.world, mouseConstraint);
+
+    // keep the mouse in sync with rendering
+    render.mouse = mouse;
+
+    // fit the render viewport to the scene
+    Render.lookAt(render, {
+        min: { x: 0, y: 0 },
+        max: { x: 800, y: 600 }
+    });
+
+ 
+
+
+Example.car.title = 'Car';
+Example.car.for = '>=0.14.2';
+
+/**
+* Creates a composite with simple car setup of bodies and constraints.
+* @method car
+* @param {number} xx
+* @param {number} yy
+* @param {number} width
+* @param {number} height
+* @param {number} wheelSize
+* @return {composite} A new composite car body
+*/
+var Example = Example || {};
+
+Example.car = function() {
+    var Engine = Matter.Engine,
+        Render = Matter.Render,
+        Runner = Matter.Runner,
+        Composites = Matter.Composites,
+        MouseConstraint = Matter.MouseConstraint,
+        Mouse = Matter.Mouse,
+        Composite = Matter.Composite,
+        Bodies = Matter.Bodies;
+}
+
+Example.car.car = function(xx, yy, width, height, wheelSize) {
+    var Body = Matter.Body,
+        Bodies = Matter.Bodies,
+        Composite = Matter.Composite,
+        Constraint = Matter.Constraint;
+
+    var group = Body.nextGroup(true),
+        wheelBase = 20,
+        wheelAOffset = -width * 0.5 + wheelBase,
+        wheelBOffset = width * 0.5 - wheelBase,
+        wheelYOffset = 0;
+
+    var car = Composite.create({ label: 'Car' }),
+        body = Bodies.rectangle(xx, yy, width, height, { 
+            collisionFilter: {
+                group: group
+            },
+            chamfer: {
+                radius: height * 0.5
+            },
+            density: 0.0002
+        });
+
+    var wheelA = Bodies.circle(xx + wheelAOffset, yy + wheelYOffset, wheelSize, { 
+        collisionFilter: {
+            group: group
+        },
+        friction: 0.8
+    });
+                
+    var wheelB = Bodies.circle(xx + wheelBOffset, yy + wheelYOffset, wheelSize, { 
+        collisionFilter: {
+            group: group
+        },
+        friction: 0.8
+    });
+                
+    var axelA = Constraint.create({
+        bodyB: body,
+        pointB: { x: wheelAOffset, y: wheelYOffset },
+        bodyA: wheelA,
+        stiffness: 1,
+        length: 0
+    });
+                    
+    var axelB = Constraint.create({
+        bodyB: body,
+        pointB: { x: wheelBOffset, y: wheelYOffset },
+        bodyA: wheelB,
+        stiffness: 1,
+        length: 0
+    });
+    
+    Composite.addBody(car, body);
+    Composite.addBody(car, wheelA);
+    Composite.addBody(car, wheelB);
+    Composite.addConstraint(car, axelA);
+    Composite.addConstraint(car, axelB);
+
+    return car;
+};
+};
+
+
+
+
+
+
+
+
+
+</script>
+
+    <button onclick="StartBoxes()">Start Boxes</button>
+    <button onclick="StartBalloon()">Start Balloon</button>
+    <button onclick="StartBalloonWithString()">Start Balloon With String</button>
+    <button onclick="CutTheRope()">Cut The Rope</button>
+    <button onclick="StartSlingshot()">Start Slingshot</button>
+    <button onclick="StartSlingshot2()">Start Slingshot2</button>
+    <button onclick="constraints()">Constraints</button>
+    <button onclick="friction()">Friction</button>
+    <button onclick="manipulation()">Manipulation</button>
+    <button onclick="car()">Car</button>
+
