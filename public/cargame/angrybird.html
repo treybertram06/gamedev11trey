@@ -97,8 +97,8 @@ function StartAngryBord() {
 
  // add bodies
  var ground = Bodies.rectangle(395, 600, 2000, 50, { isStatic: true, render: { strokeStyle: '#ffffff', sprite: { texture: './woodFloor2.png'  } } }),
-        rockOptions = { density: 0.004 },
-        rock = Bodies.polygon(170, 450, 8, 20, rockOptions),
+        rockOptions = { density: 0.004, render: { strokeStyle: '#ffffff', sprite: { texture: './bord.png'  } } },
+        rock = Bodies.polygon(170, 450, 50, 25, rockOptions ),
         anchor = { x: 170, y: 450 },
         elastic = Constraint.create({ 
             pointA: anchor, 
@@ -107,8 +107,9 @@ function StartAngryBord() {
             render: { strokeStyle: 'gray', lineWidth: 2 }
         });
 
+    var pinsOptions = { render: { strokeStyle: '#ffffff', sprite: { texture: './porky.png'  } } };
     var pyramid = Composites.pyramid(500, 300, 9, 10, 0, 0, function(x, y) {
-        return Bodies.rectangle(x, y, 25, 40);
+        return Bodies.polygon(x, y, 16, 25, pinsOptions);
     });
 
     var ground2 = Bodies.rectangle(610, 250, 200, 20, { isStatic: true, render: { fillStyle: '#060a19' } });
