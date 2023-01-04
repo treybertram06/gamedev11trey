@@ -121,7 +121,7 @@ function StartAngryBord() {
     Composite.add(engine.world, [ground, pyramid, ground2, pyramid2, rock, elastic]);
     Events.on(engine, 'afterUpdate', function() {
         if (mouseConstraint.mouse.button === -1 && (rock.position.x > 190 || rock.position.y < 430) && bords > 0) {
-            rock = Bodies.polygon(170, 450, 7, 20, rockOptions);
+            rock = Bodies.polygon(170, 450, 16, 25, rockOptions);
             Composite.add(engine.world, rock);
             elastic.bodyB = rock;
             bords = bords - 1;
