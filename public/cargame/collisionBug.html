@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Physics Engine for JavaScript - Matter.js - CodeBrainer</title>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.17.1/matter.min.js"></script>
+ <script src="matter.js"></script>
+ <style>
+ canvas {
+ position: relative;
+ border: 1px solid black;
+ background-color: white;
+ }
+ </style>
+</head>
+<body onload="init()">
+ <div id="areaToRender">
+ </div>
+ <div>
+
+ </div>
+
+
+<script>
+var score = 0;
+var bords = 5;
+let height = window.innerHeight - 65;
+let width = window.innerWidth - 35;
+
+let Engine = Matter.Engine,
+ Render = Matter.Render,
+ Runner = Matter.Runner,
+ Bodies = Matter.Bodies,
+ Composite = Matter.Composite,
+ Composites = Matter.Composites,
+ Constraint = Matter.Constraint,
+ Mouse = Matter.Mouse,
+ MouseConstraint = Matter.MouseConstraint,
+ Events = Matter.Events;
+ Detector = Matter.Detector;
+ let engine;
+let render;
+let runner;
+
+function init() {
+
+ // create an engine
+ engine = Engine.create();
+
+ // create a renderer
+ render = Render.create({
+ element: document.getElementById("areaToRender"),
+ engine: engine,
+ options: {
+ width: (window.innerWidth - 35),
+ height: (window.innerHeight - 65),
+ pixelRatio: 1,
+ background: '#fafafa',
+ wireframes: false // <-- important
+ }
+ });
+
+ 
+ // run the renderer
+ Render.run(render);
+
+ // create runner
+ runner = Runner.create();
+
+ // run the engine
+ Runner.run(runner, engine);
+}
+
+let lastClear = "(not given)"
+function clearWorld(exampleName) {
+ if (lastClear != exampleName) {
+ lastClear = exampleName
+
+ Matter.Composite.clear(engine.world, false)
+ }
+}
+
+setInterval(function() {
+    refresh()
+}, 250)
+
+function refresh() {
+
+        document.getElementById("bordsLeft").innerHTML = bords;
+
+        document.getElementById("score").innerHTML = score;
+
+   
+
+}
+
+function StartAngryBord() {
+ clearWorld("AngryBord")
+
+
+
+ // add bodies
+ var ground = Bodies.rectangle(395, 600, 2000, 50, { isStatic: true, render: { strokeStyle: '#ffffff', sprite: { texture: './woodFloor2.png'  } } }),
+        rockOptions = { density: 0.004, render: { strokeStyle: '#ffffff', sprite: { texture: './bord.png'  } } },
+        rock = Bodies.polygon(70, 450, 50, 25, rockOptions ),
+        anchor = { x: 70, y: 450 },
+        elastic = Constraint.create({ 
+            pointA: anchor, 
+            bodyB: rock, 
+            stiffness: 0.05,
+            render: { strokeStyle: 'gray', lineWidth: 2 }
+        });
+
+    var pinsOptions = { render: { strokeStyle: '#ffffff', sprite: { texture: './porky.png'  } } };
+    var pyramid = Composites.pyramid(500, 300, 9, 10, 0, 0, function(x, y) {
+        return Bodies.polygon(x, y, 16, 25, pinsOptions);
+    });
+
+    var ground2 = Bodies.rectangle(880, 250, 240, 20, { isStatic: true, render: { fillStyle: '#060a19' } });
+
+    var pyramid2 = Composites.pyramid(750, 0, 5, 10, 0, 0, function(x, y) {
+        return Bodies.polygon(x, y, 16, 25, pinsOptions);
+    });
+
+    Composite.add(engine.world, [ground, pyramid, ground2, pyramid2, rock, elastic]);
+    Events.on(engine, 'afterUpdate', function() {
+        if (mouseConstraint.mouse.button === -1 && (rock.position.x > 90 || rock.position.y < 430) && bords > 0) {
+
+  
+                rock = Bodies.polygon(70, 450, 7, 20, rockOptions);
+                Composite.add(engine.world, rock);
+                elastic.bodyB = rock;
+                bords = bords - 1;
+
+
+        
+        }
+
+
+             Detector.setBodies = function(rock, polygon) {
+                score = score + 1;
+                Detector.clear = function(detector) {
+                    detector.bodies;
+                };
+
+
+            };
+
+        
+        
+
+    });
+
+
+  // add mouse control
+    var mouse = Mouse.create(render.canvas),
+        mouseConstraint = MouseConstraint.create(engine, {
+            mouse: mouse,
+            constraint: {
+                stiffness: 0.2,
+                render: {
+                    visible: false
+                }
+            }
+        });
+ 
+
+    Composite.add(engine.world, mouseConstraint);
+
+    // keep the mouse in sync with rendering
+    render.mouse = mouse;
+
+    // fit the render viewport to the scene
+    Render.lookAt(render, {
+        min: { x: 0, y: 0 },
+        max: { x: 800, y: 600 }
+    });
+  }
+
+</script>
+
+
+<button onclick="StartAngryBord()">Start Game</button>
+
+<div id="bordsLeft">...</div><div id="score">0</div>
+</body>
+</html>
+
+
