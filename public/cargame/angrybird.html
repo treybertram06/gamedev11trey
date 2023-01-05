@@ -24,6 +24,7 @@
 
 
 <script>
+var score = 0;
 var bords = 5;
 let height = window.innerHeight - 65;
 let width = window.innerWidth - 35;
@@ -38,6 +39,7 @@ let Engine = Matter.Engine,
  Mouse = Matter.Mouse,
  MouseConstraint = Matter.MouseConstraint,
  Events = Matter.Events;
+ Detector = Matter.Detector;
  let engine;
 let render;
 let runner;
@@ -88,6 +90,12 @@ function refresh() {
 
         document.getElementById("bordsLeft").innerHTML = bords;
 
+        document.getElementById("score").innerHTML = score;
+
+ 
+
+   
+
 }
 
 function StartAngryBord() {
@@ -98,8 +106,8 @@ function StartAngryBord() {
  // add bodies
  var ground = Bodies.rectangle(395, 600, 2000, 50, { isStatic: true, render: { strokeStyle: '#ffffff', sprite: { texture: './woodFloor2.png'  } } }),
         rockOptions = { density: 0.004, render: { strokeStyle: '#ffffff', sprite: { texture: './bord.png'  } } },
-        rock = Bodies.polygon(170, 450, 50, 25, rockOptions ),
-        anchor = { x: 170, y: 450 },
+        rock = Bodies.polygon(70, 450, 50, 25, rockOptions ),
+        anchor = { x: 70, y: 450 },
         elastic = Constraint.create({ 
             pointA: anchor, 
             bodyB: rock, 
@@ -112,20 +120,61 @@ function StartAngryBord() {
         return Bodies.polygon(x, y, 16, 25, pinsOptions);
     });
 
-    var ground2 = Bodies.rectangle(610, 250, 200, 20, { isStatic: true, render: { fillStyle: '#060a19' } });
+    var ground2 = Bodies.rectangle(880, 250, 240, 20, { isStatic: true, render: { fillStyle: '#060a19' } });
 
-    var pyramid2 = Composites.pyramid(550, 0, 5, 10, 0, 0, function(x, y) {
-        return Bodies.rectangle(x, y, 25, 40);
+    var pyramid2 = Composites.pyramid(750, 0, 5, 10, 0, 0, function(x, y) {
+        return Bodies.polygon(x, y, 16, 25, pinsOptions);
     });
 
     Composite.add(engine.world, [ground, pyramid, ground2, pyramid2, rock, elastic]);
     Events.on(engine, 'afterUpdate', function() {
-        if (mouseConstraint.mouse.button === -1 && (rock.position.x > 190 || rock.position.y < 430) && bords > 0) {
-            rock = Bodies.polygon(170, 450, 16, 25, rockOptions);
-            Composite.add(engine.world, rock);
-            elastic.bodyB = rock;
-            bords = bords - 1;
+        if (mouseConstraint.mouse.button === -1 && (rock.position.x > 90 || rock.position.y < 430) && bords > 0) {
+
+  
+                rock = Bodies.polygon(70, 450, 7, 20, rockOptions);
+                Composite.add(engine.world, rock);
+                elastic.bodyB = rock;
+                bords = bords - 1;
+
+
+        
         }
+/////////////////////////////////////////   collision detection for score   /////////////////////////////////////////
+
+        Detector.create = function(options) {
+        var defaults = {
+            bodies: [rock, polygon],
+            pairs: null
+        };
+
+        return Common.extend(defaults, options);
+    };
+
+    /**
+     * Sets the list of bodies in the detector.
+     * @method setBodies
+     * @param {detector} detector
+     * @param {body[]} bodies
+     */
+    Detector.setBodies = function(detector, bodies) {
+        detector.bodies = bodies.slice(0);
+        score = score +50;
+    };
+
+    /**
+     * Clears the detector including its list of bodies.
+     * @method clear
+     * @param {detector} detector
+     */
+    Detector.clear = function(detector) {
+        detector.bodies = [];
+    };
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+     
+
     });
 
 
@@ -160,7 +209,7 @@ function StartAngryBord() {
 <button onclick="StartAngryBord()">Start Game</button>
 
 <div id="bordsLeft">...</div>
+
+<div id="score">0</div>
 </body>
 </html>
-
-
