@@ -24,6 +24,7 @@
 
 
 <script>
+
 var score = 0;
 var bords = 5;
 let height = window.innerHeight - 65;
@@ -86,19 +87,41 @@ function clearWorld(exampleName) {
 
 setInterval(function() {
     refresh()
-}, 250)
+}, 50)
+
+
 
 function refresh() {
 
+
+
         document.getElementById("bordsLeft").innerHTML = bords;
 
-        document.getElementById("score").innerHTML = score;
+        document.getElementById("score").innerHTML = Math.round(score);
+
+        checkGameOver();
+
+        
 
  
 
    
 
 }
+
+function checkGameOver() {
+    if (bords == 0) {
+        gameOver();
+    }
+}
+
+function gameOver() {
+    setTimeout (function() {
+        alert("Game Over, your score is: " + Math.round(score) + ", you suck");
+        window.refresh();
+    }, 5000);
+}
+
 
 function StartAngryBord() {
  clearWorld("AngryBord")
@@ -113,11 +136,14 @@ function StartAngryBord() {
         elastic = Constraint.create({ 
             pointA: anchor, 
             bodyB: rock, 
-            stiffness: 0.05,
+            stiffness: 0.01,
             render: { strokeStyle: 'gray', lineWidth: 2 }
         });
+        rock.label = 'rock';
 
-    var pinsOptions = { render: { strokeStyle: '#ffffff', sprite: { texture: './porky.png'  } } };
+    var pinsOptions1 = { label: 'pig1', render: { strokeStyle: '#ffffff', sprite: { texture: './porky.png'  } } };
+    var pinsOptions2 = { label: 'pig2', render: { strokeStyle: '#ffffff', sprite: { texture: './porky.png'  } } };
+    var pinsOptions3 = { label: 'pig3', render: { strokeStyle: '#ffffff', sprite: { texture: './porky.png'  } } };
     var trianglesOptions = {angle: 1.5708, render: { fillStyle: '#B57300'}, isStatic: true };
 
     ////////////////world design and enemies/////////////
@@ -132,16 +158,27 @@ function StartAngryBord() {
 
         var wall05 = Bodies.rectangle(950, 450, 10, 1000, { isStatic: true, render: { fillStyle: '#B57300',  } });
 
-        var pig01 = Bodies.polygon(620, 290, 50, 10, pinsOptions);
+        var wall06 = Bodies.trapezoid(400, 600, 100, 50, 0.5, { isStatic: true, render: { fillStyle: '#B57300',  } });
 
-        var pigG01 = Composites.pyramid(620, 250, 5, 5, 0, 0, function(x, y) {
-            return Bodies.polygon(x, y, 12, 10, pinsOptions);
+        var pigG01 = Composites.pyramid(620, 248, 5, 5, 0, 0, function(x, y) {
+            return Bodies.polygon(x, y, 8, 10, pinsOptions1);
         });
+
+        var pigG02 = Composites.pyramid(500, 248, 5, 5, 0, 0, function(x, y) {
+            return Bodies.polygon(x, y, 8, 10, pinsOptions2);
+        });
+
+        var pigG03 = Composites.pyramid(500, 520, 5, 5, 0, 0, function(x, y) {
+            return Bodies.polygon(x, y, 8, 10, pinsOptions3);
+        });
+
+
+
 
 
    /////////////////////////////////////////////////////
 
-    Composite.add(engine.world, [ground, rock, elastic, wall01, wall02, wall03, wall04, wall05, pigG01]);
+    Composite.add(engine.world, [ground, rock, elastic, wall01, wall02, wall03, wall04, wall05, wall06, pigG01, pigG02, pigG03]);
     Events.on(engine, 'afterUpdate', function() {
         if (mouseConstraint.mouse.button === -1 && (rock.position.x > 90 || rock.position.y < 430) && bords > 0) {
 
@@ -156,35 +193,35 @@ function StartAngryBord() {
         }
 /////////////////////////////////////////   collision detection for score   /////////////////////////////////////////
 
-        Detector.create = function(options) {
-        var defaults = {
-            bodies: [],
-            pairs: null
-        };
+Events.on(engine, 'collisionStart', function(event) {
+    var pairs = event.pairs;
 
-        return Common.extend(defaults, options);
-    };
+    for (var i = 0, j = pairs.length; i != j; ++i) {
+        var pair = pairs[i];
 
-    /**
-     * Sets the list of bodies in the detector.
-     * @method setBodies
-     * @param {detector} detector
-     * @param {body[]} bodies
-     */
-    Detector.setBodies = function(detector, bodies) {
-        detector.bodies = bodies.slice(0);
-        score = score +50;
-    };
+        if ((pair.bodyA.label === 'rock' && (pair.bodyB.label === 'pig1' || pair.bodyB.label === 'pig2')) || 
+            ((pair.bodyA.label === 'pig1' || pair.bodyA.label === 'pig2') && pair.bodyB.label === 'rock')) {
+            // Increase the score by 1
+            score = score + 0.01;
+            break;
+        }
+    }
+});
 
-    /**
-     * Clears the detector including its list of bodies.
-     * @method clear
-     * @param {detector} detector
-     */
-    Detector.clear = function(detector) {
-        detector.bodies = [];
-    };
+Events.on(engine, 'collisionEnd', function(event) {
+    var pairs = event.pairs;
 
+    for (var i = 0, j = pairs.length; i != j; ++i) {
+        var pair = pairs[i];
+
+        if ((pair.bodyA.label === 'rock' && pair.bodyB.label === 'pig') || 
+            (pair.bodyA.label === 'pig' && pair.bodyB.label === 'rock')) {
+            // Increase the score by 1
+            score = score;
+            break;
+        }
+    }
+});
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
