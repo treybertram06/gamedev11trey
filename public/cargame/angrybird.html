@@ -4,7 +4,7 @@
  <meta charset="UTF-8">
  <meta http-equiv="X-UA-Compatible" content="IE=edge">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Physics Engine for JavaScript - Matter.js - CodeBrainer</title>
+ <title>Angry Birds</title>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.17.1/matter.min.js"></script>
  <script src="matter.js"></script>
  <style>
@@ -15,7 +15,7 @@
  }
  </style>
 </head>
-<body onload="init()">
+<body onload="init()" onload="StartAngryBord()">
  <div id="areaToRender">
  </div>
  <div>
@@ -71,6 +71,8 @@ function init() {
 
  // run the engine
  Runner.run(runner, engine);
+
+ myTimeout = setTimeout(StartAngryBord(), 300);
 }
 
 let lastClear = "(not given)"
@@ -104,9 +106,9 @@ function StartAngryBord() {
 
 
  // add bodies
- var ground = Bodies.rectangle(395, 600, 2000, 50, { isStatic: true, render: { strokeStyle: '#ffffff', sprite: { texture: './woodFloor2.png'  } } }),
-        rockOptions = { density: 0.004, render: { strokeStyle: '#ffffff', sprite: { texture: './bord.png'  } } },
-        rock = Bodies.polygon(70, 450, 50, 25, rockOptions ),
+ var ground = Bodies.rectangle(600, 600, 1000, 50, { isStatic: true, render: { strokeStyle: '#ffffff', sprite: { texture: './woodFloor2.png'  } } }),
+        rockOptions = { density: 0.004, render: { strokeStyle: '#ffffff', sprite: { texture: './bord.png'  } }, restitution: 0.8},
+        rock = Bodies.polygon(70, 450, 50, 10, rockOptions ),
         anchor = { x: 70, y: 450 },
         elastic = Constraint.create({ 
             pointA: anchor, 
@@ -116,22 +118,35 @@ function StartAngryBord() {
         });
 
     var pinsOptions = { render: { strokeStyle: '#ffffff', sprite: { texture: './porky.png'  } } };
-    var pyramid = Composites.pyramid(500, 300, 9, 10, 0, 0, function(x, y) {
-        return Bodies.polygon(x, y, 16, 25, pinsOptions);
-    });
+    var trianglesOptions = {angle: 1.5708, render: { fillStyle: '#B57300'}, isStatic: true };
 
-    var ground2 = Bodies.rectangle(880, 250, 240, 20, { isStatic: true, render: { fillStyle: '#060a19' } });
+    ////////////////world design and enemies/////////////
+   
+        var wall01 = Bodies.rectangle(400, 0, 1000, 50, { isStatic: true, render: { fillStyle: '#B57300',  } });
 
-    var pyramid2 = Composites.pyramid(750, 0, 5, 10, 0, 0, function(x, y) {
-        return Bodies.polygon(x, y, 16, 25, pinsOptions);
-    });
+        var wall02 = Bodies.polygon(950, 525, 3, 100, trianglesOptions);
 
-    Composite.add(engine.world, [ground, pyramid, ground2, pyramid2, rock, elastic]);
+        var wall03 = Bodies.rectangle(600, 150, 10, 300, { isStatic: true, render: { fillStyle: '#B57300',  } });
+
+        var wall04 = Bodies.rectangle(600, 300, 300, 10, { isStatic: true, render: { fillStyle: '#B57300',  } });
+
+        var wall05 = Bodies.rectangle(950, 450, 10, 1000, { isStatic: true, render: { fillStyle: '#B57300',  } });
+
+        var pig01 = Bodies.polygon(620, 290, 50, 10, pinsOptions);
+
+        var pigG01 = Composites.pyramid(620, 250, 5, 5, 0, 0, function(x, y) {
+            return Bodies.polygon(x, y, 12, 10, pinsOptions);
+        });
+
+
+   /////////////////////////////////////////////////////
+
+    Composite.add(engine.world, [ground, rock, elastic, wall01, wall02, wall03, wall04, wall05, pigG01]);
     Events.on(engine, 'afterUpdate', function() {
         if (mouseConstraint.mouse.button === -1 && (rock.position.x > 90 || rock.position.y < 430) && bords > 0) {
 
   
-                rock = Bodies.polygon(70, 450, 7, 20, rockOptions);
+                rock = Bodies.polygon(70, 450, 50, 10, rockOptions);
                 Composite.add(engine.world, rock);
                 elastic.bodyB = rock;
                 bords = bords - 1;
@@ -143,7 +158,7 @@ function StartAngryBord() {
 
         Detector.create = function(options) {
         var defaults = {
-            bodies: [rock, polygon],
+            bodies: [],
             pairs: null
         };
 
