@@ -158,20 +158,11 @@ function StartAngryBord() {
     var pinsOptions2 = { label: 'pig2', render: { strokeStyle: '#ffffff', sprite: { texture: './porky.png'  } } };
     var pinsOptions3 = { label: 'pig3', render: { strokeStyle: '#ffffff', sprite: { texture: './porky.png'  } } };
     var trianglesOptions = {angle: 1.5708, render: { fillStyle: '#B57300'}, isStatic: true };
+    var backOptions = { isStatic: true, isSensor: true, render: { sprite: { texture: "./background.jpg", xScale: (100), yScale: (100) } } };
 
     ////////////////world design and enemies/////////////
 
-        var background = Bodies.rectangle(0, 0, 1, 1, {
-       isStatic: true,
-        isSensor: true,
-          render: {
-             sprite: {
-                  texture: "./background.png",
-                  xScale: (width*0.01),
-                 yScale: (height*0.01)
-                 }
-       }
-    });
+        var background = Bodies.rectangle(1, 1, 1, 1, backOptions);
    
         var wall01 = Bodies.rectangle(400, 0, 1000, 50, { isStatic: true, render: { fillStyle: '#B57300',  } });
 
@@ -291,11 +282,7 @@ Events.on(engine, 'collisionEnd', function(event) {
         max: { x: 800, y: 600 }
     });
 
-    function makebig() {
-    background.render.sprite.xScale = width;
-    background.render.sprite.yScale = height;
-    Body.scale( background, width, height);
-    };
+  
 
   }
 
@@ -307,7 +294,7 @@ Events.on(engine, 'collisionEnd', function(event) {
 
 
 <button onclick="StartAngryBord()">Start Game</button>
-<button onclick="makebig()">Scale</button>
+
 
 
 
