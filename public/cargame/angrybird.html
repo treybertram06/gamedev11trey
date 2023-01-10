@@ -31,8 +31,8 @@
 
 var score = 0;
 var bords = 5;
-let height = window.innerHeight - 85;
-let width = window.innerWidth - 35;
+let height = window.innerHeight;
+let width = window.innerWidth;
 
 let Engine = Matter.Engine,
  Render = Matter.Render,
@@ -65,7 +65,7 @@ function init() {
  width: (window.innerWidth - 35),
  height: (window.innerHeight - 85),
  pixelRatio: 1,
- background: '#fafafa',
+ background: './background.png',
  wireframes: false // <-- important
  }
  });
@@ -158,12 +158,10 @@ function StartAngryBord() {
     var pinsOptions2 = { label: 'pig2', render: { strokeStyle: '#ffffff', sprite: { texture: './porky.png'  } } };
     var pinsOptions3 = { label: 'pig3', render: { strokeStyle: '#ffffff', sprite: { texture: './porky.png'  } } };
     var trianglesOptions = {angle: 1.5708, render: { fillStyle: '#B57300'}, isStatic: true };
-    var backOptions = { isStatic: true, isSensor: true, render: { sprite: { texture: "./background.jpg", xScale: (100), yScale: (100) } } };
+
 
     ////////////////world design and enemies/////////////
 
-        var background = Bodies.rectangle(1, 1, 1, 1, backOptions);
-   
         var wall01 = Bodies.rectangle(400, 0, 1000, 50, { isStatic: true, render: { fillStyle: '#B57300',  } });
 
         var wall02 = Bodies.trapezoid(900, 560, -200, 200, 2, { isStatic: true, render: { fillStyle: '#B57300',  } });
@@ -198,7 +196,7 @@ function StartAngryBord() {
 
    /////////////////////////////////////////////////////
 
-    Composite.add(engine.world, [background, ground, elastic, rock, wall01, wall02, wall03, wall04, wall05, wall06, wall07, wall08, pigG01, pigG02, pigG03]);
+    Composite.add(engine.world, [ground, elastic, rock, wall01, wall02, wall03, wall04, wall05, wall06, wall07, wall08, pigG01, pigG02, pigG03]);
     Events.on(engine, 'afterUpdate', function() {
         if (mouseConstraint.mouse.button === -1 && (rock.position.x > 90 || rock.position.y < 430) && bords > 0) {
 
