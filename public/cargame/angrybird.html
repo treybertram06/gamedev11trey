@@ -12,6 +12,22 @@
  position: relative;
  border: 1px solid black;
  }
+
+ #box {
+  position: absolute;
+
+  color: #eee;
+  height: 80px;
+  width: 140px;
+  cursor: move;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Arial";
+  text-shadow: 2px 2px 3px #38e;
+}
+
+
  </style>
  
 </head>
@@ -20,10 +36,10 @@
 <div id="bordsLeft">...</div>
  <div id="areaToRender">
  </div>
+ 
  <div>
 
  </div>
-
 
 <script>
 
@@ -33,6 +49,7 @@ var score = 0;
 var bords = 5;
 let height = window.innerHeight;
 let width = window.innerWidth;
+var gameoverdone = false;
 
 let Engine = Matter.Engine,
  Render = Matter.Render,
@@ -51,7 +68,7 @@ let runner;
 
 function init() {
 
-//make canvas background an image
+
 
 
  // create an engine
@@ -98,7 +115,7 @@ function clearWorld(exampleName) {
  }
 }
 
-setInterval(function() {
+myRefresh = setInterval(function() {
     refresh()
 }, 50)
 
@@ -112,7 +129,11 @@ function refresh() {
 
         document.getElementById("score").innerHTML = "Score: " + Math.round(score);
 
+        document.getElementById("finalScore").innerHTML = Math.round(score);
+
+        
         checkGameOver();
+        
 
         
 
@@ -124,17 +145,58 @@ function refresh() {
 
 function checkGameOver() {
     if (bords == 0) {
+
         gameOver();
+        clearInterval(myRefresh)
     }
 }
 
 function gameOver() {
     setTimeout (function() {
-        alert("Game Over, your score is: " + Math.round(score) + ", you suck");
-        window.refresh();
+       gameOverr();
+
     }, 5000);
+
+    
+
 }
 
+function gameOverr() {
+
+    clearWorld(gameOver)
+
+    
+const box = {
+  w: 140,
+  h: 80,
+  body: Matter.Bodies.rectangle(350, 0, 280, 160),
+  element: document.querySelector("#box"),
+  render() {
+    const {x, y} = this.body.position;
+    this.element.style.top = `${(y - this.h / 2 + 100)}px`;
+    this.element.style.left = `${(x - this.w / 2 + 400)}px`;
+    this.element.style.transform = `rotate(${this.body.angle}rad)`;
+  },
+};
+const ground = Matter.Bodies.rectangle(
+  400, 500, 400, 50, {isStatic: true}
+);
+const mouseConstraint = Matter.MouseConstraint.create(
+  engine, {element: document.body}
+);
+Matter.Composite.add(
+  engine.world, [box.body, ground, mouseConstraint]
+);
+(function rerender() {
+  box.render();
+  Matter.Engine.update(engine);
+  requestAnimationFrame(rerender);
+})();
+
+
+
+
+}
 
 function StartAngryBord() {
  clearWorld("AngryBord")
@@ -208,7 +270,7 @@ function StartAngryBord() {
                 rock.label = 'rock';
                  //wait 3 seconds then remove the rock
              setTimeout(function() {
-                World.remove(engine.world, rock);
+                //composite.remove(engine.world, rock);
             }, 3000);
 
 
@@ -289,6 +351,18 @@ Events.on(engine, 'collisionEnd', function(event) {
 
 
 </script>
+
+
+<button onclick="gameOver()">test game over</button>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+<div id="box">
+  <h1>Your score is: <div id="finalScore">...</div></h1>
+</div>
+
 
 
 </body>
