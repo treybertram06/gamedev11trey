@@ -31,6 +31,8 @@
         var bullets = [];
 
         var keys = [];
+            
+        var levelAngry = false;
 
         var score = document.getElementById("startingScore").value;
 
@@ -91,6 +93,11 @@
             ctx.font = "30px Arial";
             ctx.fillText("Game Over", 10, 30);
         }
+            
+        function drawLevelAngry() {
+             alert("You completed Level 3!")
+            window.location.href = "cargame/angrybird.html";
+        }
 
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -101,12 +108,14 @@
                 drawBullets();
                 drawScore();
             } else {
-                drawGameOver();
-            }
+               if (gameOver) {
+                    drawGameOver();
+                } else {
+                    drawLevelAngry();
         }
 
         function update() {
-            if (!gameOver) {
+            if (!gameOver && !levelAngry) {
                 updatePlayer();
                 updateEnemies();
                 updateBullets();
@@ -234,7 +243,10 @@
                     enemies[i].y < player.y + player.height &&
                     enemies[i].y + enemies[i].height > player.y) {
                     gameOver = true;
-                }          
+                }  
+                 if (score > 5000) {
+                     levelAngry = true;
+                 }
              }
           }
         
