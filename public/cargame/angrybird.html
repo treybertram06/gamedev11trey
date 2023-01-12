@@ -31,7 +31,7 @@
  </style>
  
 </head>
-<body onload="init()" onload="StartAngryBord()">
+<body onload="init()" onload="StartAngryBord()" onload="playSong()">
 <div id="score">0</div>
 <div id="bordsLeft">...</div>
  <div id="areaToRender">
@@ -42,7 +42,12 @@
  </div>
 
 <script>
+let myThemeSong = new Audio('Angry Birds Theme Song.mp3')
 
+function playSong() {
+       myThemeSong.currentTime = 0;
+        myThemeSong.play()
+    }
 
 
 var score = 0;
