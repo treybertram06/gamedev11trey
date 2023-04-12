@@ -35,7 +35,7 @@ messages = [
     {"role": "system", "content": "Yes, I will do that."}
 ]
 system_msg = "You are a creative assistant."
-openai.api_key = "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"
+openai.api_key = "OPENAI API KEY"
 
 print("Say hello to your new assistant!")
 while input != "quit()":
