@@ -1,11 +1,13 @@
+#Don't forget to install openai through pip
+#Also, get your API key from the openai website and if youre not a part of the 
+#GPT-4 beta, change the model from "gpt-4" to "gpt-3.5-turbo"
+
 import openai
 import os
 import json
 import requests
 import webbrowser
 import random 
-
-
 
 def generate_dall_e_image(prompt):
     headers = {
