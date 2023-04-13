@@ -2,6 +2,10 @@ import openai
 import os
 import json
 import requests
+import webbrowser
+import random 
+
+
 
 def generate_dall_e_image(prompt):
     headers = {
@@ -31,23 +35,24 @@ messages = [
     {"role": "system", "content": "Hello, what can I do for you today?"},
     {"role": "user", "content": "Can you put a tilde at the start of the response every time i ask you for a photo?"},
     {"role": "system", "content": "Yes, I can put a tilde in start of the response when you ask for a photo."},
-    {"role": "user", "content": "When I ask you to create a photo, can you instead just describe the photo in 2 sentences, and only respond with the description? You will add no extra unnecessary words."},
+    {"role": "user", "content": "When I ask you to create a photo, you will instead describe the photo in in detail and as photorealistic."},
     {"role": "system", "content": "Yes, I will do that."}
 ]
 system_msg = "You are a creative assistant."
-openai.api_key = "OPENAI API KEY"
+openai.api_key = "OPENAI API KEY HERE"
 
 print("Say hello to your new assistant!")
 while input != "quit()":
+    temp = (random.randint(7,10)) * 0.1
     message = input("")
     messages.append( {"role": "user", "content": message} )
     response = openai.ChatCompletion.create(
         model="gpt-4",
         messages=messages,
-        top_p=1.0,
-        temperature=1.0,
-        frequency_penalty=0.25,
-        presence_penalty=0.25 )
+        top_p=temp,
+        temperature=temp,
+        frequency_penalty=0.0,
+        presence_penalty=0.0 )
     
     reply = response["choices"][0]["message"]["content"]
     messages.append({"role": "assistant", "content": reply})
@@ -57,5 +62,8 @@ while input != "quit()":
         split_prompt = reply.split("~")[1].strip()
         image_url = generate_dall_e_image(split_prompt)
         print(image_url)
-
-print(split_prompt)
+        
+        if image_url != None:
+            webbrowser.open(image_url)
+            
+            
